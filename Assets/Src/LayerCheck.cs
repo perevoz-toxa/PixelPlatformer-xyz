@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class LayerCheck : MonoBehaviour
 {
     [SerializeField] private LayerMask _groundLayer;

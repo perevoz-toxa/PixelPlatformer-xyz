@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3201441693
+    locked: 0
+  - name: DecorBack
+    uniqueID: 1269023519
+    locked: 0
+  - name: Level
+    uniqueID: 1549618455
+    locked: 0
+  - name: Props
+    uniqueID: 116793705
+    locked: 0
+  - name: Creatures
+    uniqueID: 3484307663
+    locked: 0
+  - name: DecorTop
+    uniqueID: 530762955
+    locked: 0
