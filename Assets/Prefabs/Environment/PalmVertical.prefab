@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3949428312164865067}
   - component: {fileID: 3949428312164865066}
-  - component: {fileID: 3949428312164865068}
+  - component: {fileID: 815404422085263400}
   m_Layer: 0
   m_Name: PalmVertical
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3949428312164865068
+--- !u!114 &815404422085263400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,16 +92,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3949428312164865065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98a1d86fe665d53449fff22cea32f96b, type: 3}
+  m_Script: {fileID: 11500000, guid: db6c49d97d5a78f409ccbc91d3e241a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 5
-  _loop: 1
-  _sprites:
-  - {fileID: 8683632313750085214, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
-  - {fileID: 262518517033693272, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
-  - {fileID: 762285979657935423, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
-  - {fileID: 1400697303485121525, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
+  _frameRate: 10
+  _clips:
+  - _name: idle
+    _sprites:
+    - {fileID: 8683632313750085214, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
+    - {fileID: 262518517033693272, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
+    - {fileID: 762285979657935423, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
+    - {fileID: 1400697303485121525, guid: a1906e582e72c7343b540a1ff0814e0a, type: 3}
+    _loop: 1
+    _allowNext: 0
+  _currentClipName: idle
   _onComplete:
     m_PersistentCalls:
       m_Calls: []

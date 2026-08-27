@@ -92,16 +92,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4621447622625511591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98a1d86fe665d53449fff22cea32f96b, type: 3}
+  m_Script: {fileID: 11500000, guid: db6c49d97d5a78f409ccbc91d3e241a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 5
-  _loop: 1
-  _sprites:
-  - {fileID: -6018279857378552221, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
-  - {fileID: -6505298659582443948, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
-  - {fileID: -7718236803453008505, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
-  - {fileID: -2749089684739404911, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
+  _frameRate: 10
+  _clips:
+  - _name: idle
+    _sprites:
+    - {fileID: -6018279857378552221, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
+    - {fileID: -6505298659582443948, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
+    - {fileID: -7718236803453008505, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
+    - {fileID: -2749089684739404911, guid: abcdff677b645b34d9555e3a892dd578, type: 3}
+    _loop: 1
+    _allowNext: 1
+  _currentClipName: idle
   _onComplete:
     m_PersistentCalls:
       m_Calls: []
