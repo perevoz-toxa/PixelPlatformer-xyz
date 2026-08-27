@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 
-[System.Serializable]
+[Serializable]
 public class SpriteClip
 {
     [SerializeField] private string _name;
