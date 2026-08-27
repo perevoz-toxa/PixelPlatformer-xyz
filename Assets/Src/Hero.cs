@@ -13,6 +13,8 @@ public class Hero : MonoBehaviour
     private Vector2 _direction;
     private Animator _animator;
     private SpriteRenderer _sprite;
+    private bool _isGrounded;
+    private bool _allowDoubleJump;
 
     private static readonly int isRunningKey = Animator.StringToHash("isRunning");
     private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
@@ -31,36 +33,61 @@ public class Hero : MonoBehaviour
         _direction = direction;
     }
 
+    private void Update()
+    {
+        _isGrounded = IsGrounded();
+    }
+
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(
-            _direction.x * _speed,
-            _rigidbody.velocity.y
-        );
 
-        var isJumping = _direction.y > 0;
-        var isGrounded = IsGrounded();
+        var xVelocity = _direction.x * _speed;
+        var yVelocity = CalculateYVelocity();
+        _rigidbody.velocity = new Vector2(xVelocity, yVelocity);
 
-        if (isJumping)
-        {
-            if (isGrounded)
-            {
-                _rigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse);
-            }
-        }
-        else if (_rigidbody.velocity.y > 0)
-        {
-            _rigidbody.velocity = new Vector2(
-              _direction.x * _speed,
-              _rigidbody.velocity.y * 0.5f
-          );
-        }
 
-        _animator.SetBool(isGroundedKey, isGrounded);
+
+        _animator.SetBool(isGroundedKey, _isGrounded);
         _animator.SetFloat(verticalVelocityKey, _rigidbody.velocity.y);
         _animator.SetBool(isRunningKey, _direction.x != 0);
 
         UpdateSpriteDirection();
+    }
+
+    private float CalculateYVelocity()
+    {
+        var yVelocity = _rigidbody.velocity.y;
+        var isJumpPressing = _direction.y > 0;
+
+        if (_isGrounded) _allowDoubleJump = true;
+        if (isJumpPressing)
+        {
+            yVelocity = CalculateJumpVelocity(yVelocity);
+        }
+        else if (_rigidbody.velocity.y > 0)
+        {
+            yVelocity *= 0.5f;
+        }
+
+        return yVelocity;
+    }
+
+    private float CalculateJumpVelocity(float yVelocity)
+    {
+        var isFalling = _rigidbody.velocity.y <= 0.001f;
+        if (!isFalling) return yVelocity;
+
+        if (_isGrounded)
+        {
+            yVelocity += _jumpSpeed;
+        }
+        else if (_allowDoubleJump)
+        {
+            yVelocity = _jumpSpeed;
+            _allowDoubleJump = false;
+        }
+
+        return yVelocity;
     }
 
     private bool IsGrounded()
