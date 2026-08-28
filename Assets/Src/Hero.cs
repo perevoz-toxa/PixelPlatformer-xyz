@@ -7,6 +7,7 @@ public class Hero : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpSpeed;
+    [SerializeField] private float _damageJumpSpeed;
     [SerializeField] private LayerCheck _groundCheck;
 
     private Rigidbody2D _rigidbody;
@@ -110,5 +111,14 @@ public class Hero : MonoBehaviour
         {
             _sprite.flipX = true;
         }
+    }
+
+    public void TakeDamage()
+    {
+        _animator.SetTrigger(hitKey);
+        _rigidbody.velocity = new Vector2(
+            _rigidbody.velocity.x,
+            _damageJumpSpeed
+            );
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class CollectComponent : MonoBehaviour
 {
     [SerializeField] private int _value;
 
