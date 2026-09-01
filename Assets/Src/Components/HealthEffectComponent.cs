@@ -12,14 +12,7 @@ public class HealthEffectComponent : MonoBehaviour
             var healthComponent = target.GetComponent<HealthComponent>();
             if (target != null)
             {
-                if (_effectValue < 0)
-                {
-                    healthComponent.ApplyDamage(Math.Abs(_effectValue));
-                }
-                else
-                {
-                    healthComponent.ApplyHeal(_effectValue);
-                }
+                healthComponent.ModifyHealth(_effectValue);
             }
         }
     }

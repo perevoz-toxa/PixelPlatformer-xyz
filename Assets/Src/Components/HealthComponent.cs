@@ -10,20 +10,25 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private UnityEvent _onHeal;
     [SerializeField] private UnityEvent _onDie;
 
-    public void ApplyDamage(int damageValue)
+    public void ModifyHealth(int value)
     {
-        _health -= damageValue;
-        _onDamage?.Invoke();
+        _health += value;
+        _onHeal?.Invoke();
         if (_health <= 0)
         {
             _onDie?.Invoke();
         }
-    }
-
-    public void ApplyHeal(int healValue)
-    {
-        _health += healValue;
-        _onHeal?.Invoke();
+        else
+        {
+            if (value < 0)
+            {
+                _onDamage?.Invoke();
+            }
+            else if (value > 0)
+            {
+                _onHeal?.Invoke();
+            }
+        }
     }
 
     public void PrintHealth()
