@@ -118,6 +118,10 @@ MonoBehaviour:
   _speed: 3
   _jumpSpeed: 12
   _damageJumpSpeed: 60
+  _interactionRadius: 1
+  _interactionLayer:
+    serializedVersion: 2
+    m_Bits: 512
   _groundCheck: {fileID: 3269329115740191209}
 --- !u!114 &3269329114340586009
 MonoBehaviour:
@@ -175,6 +179,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 33a9c74d-0b04-46d5-b104-1148d9ca049b
     m_ActionName: Hero/SaySomething[/Mouse/leftButton,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3269329114340586008}
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 86cdbc41-4709-4822-806a-8584ef5ba902
+    m_ActionName: Hero/Interact[/Keyboard/space,/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
@@ -261,11 +280,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _onChange:
+  _onDamage:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3269329114340586011}
         m_MethodName: TakeDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3085715426945229365}
+        m_MethodName: PrintHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3085715426945229365}
+        m_MethodName: PrintHealth
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

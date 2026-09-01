@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class EnterCollisionComponent : MonoBehaviour
 {
     [SerializeField] private string _tag;
-    [SerializeField] private EnterEvent _action;
+    [SerializeField] private EnterCollisionEvent _action;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -17,7 +17,7 @@ public class EnterCollisionComponent : MonoBehaviour
 }
 
 [Serializable]
-public class EnterEvent : UnityEvent<GameObject>
+public class EnterCollisionEvent : UnityEvent<GameObject>
 {
 
 }

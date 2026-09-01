@@ -5,20 +5,6 @@ using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 
-[Serializable]
-public class SpriteClip
-{
-    [SerializeField] private string _name;
-    [SerializeField] private Sprite[] _sprites;
-    [SerializeField] private bool _loop;
-    [SerializeField] private bool _allowNext;
-
-    public string Name => _name;
-    public Sprite[] Sprites => _sprites;
-    public bool Loop => _loop;
-    public bool AllowNext => _allowNext;
-}
-
 public class SpriteAnimation : MonoBehaviour
 {
     [SerializeField] private int _frameRate;
@@ -89,4 +75,18 @@ public class SpriteAnimation : MonoBehaviour
         _nextFrameTime = Time.time + _secondsPerFrame;
         _renderer.sprite = _currentClip.Sprites[0];
     }
+}
+
+[Serializable]
+public class SpriteClip
+{
+    [SerializeField] private string _name;
+    [SerializeField] private Sprite[] _sprites;
+    [SerializeField] private bool _loop;
+    [SerializeField] private bool _allowNext;
+
+    public string Name => _name;
+    public Sprite[] Sprites => _sprites;
+    public bool Loop => _loop;
+    public bool AllowNext => _allowNext;
 }

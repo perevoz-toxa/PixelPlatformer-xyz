@@ -8,6 +8,8 @@ public class Hero : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private float _damageJumpSpeed;
+    [SerializeField] private float _interactionRadius;
+    [SerializeField] private LayerMask _interactionLayer;
     [SerializeField] private LayerCheck _groundCheck;
 
     private Rigidbody2D _rigidbody;
@@ -16,6 +18,7 @@ public class Hero : MonoBehaviour
     private SpriteRenderer _sprite;
     private bool _isGrounded;
     private bool _allowDoubleJump;
+    private Collider2D[] _interactionResult = new Collider2D[1];
 
     private static readonly int isRunningKey = Animator.StringToHash("isRunning");
     private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
@@ -120,5 +123,24 @@ public class Hero : MonoBehaviour
             _rigidbody.velocity.x,
             _damageJumpSpeed
             );
+    }
+
+    public void Interact()
+    {
+        var size = Physics2D.OverlapCircleNonAlloc(
+            transform.position,
+            _interactionRadius,
+            _interactionResult,
+            _interactionLayer
+            );
+
+        for (int i = 0; i < size; i++)
+        {
+            var interactable = _interactionResult[i].GetComponent<InteractiveComponent>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
     }
 }
