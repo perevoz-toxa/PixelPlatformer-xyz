@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Assets.Src.Components;
-using Assets.Src.Utils;
 
 namespace Assets.Src
 {
@@ -16,11 +15,11 @@ namespace Assets.Src
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
+        [SerializeField] private SpawnComponent _foorStepParticle;
 
         private Rigidbody2D _rigidbody;
         private Vector2 _direction;
         private Animator _animator;
-        private SpriteRenderer _sprite;
         private bool _isGrounded;
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
@@ -34,7 +33,6 @@ namespace Assets.Src
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
-            _sprite = GetComponent<SpriteRenderer>();
         }
 
         public void SetDirection(Vector2 direction)
@@ -108,11 +106,11 @@ namespace Assets.Src
         {
             if (_direction.x > 0)
             {
-                _sprite.flipX = false;
+                transform.localScale = Vector3.one;
             }
             else if (_direction.x < 0)
             {
-                _sprite.flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
 
@@ -147,6 +145,11 @@ namespace Assets.Src
                     interactable.Interact();
                 }
             }
+        }
+
+        public void SpawnFootDust()
+        {
+            _foorStepParticle.Spawn();
         }
     }
 

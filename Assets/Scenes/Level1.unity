@@ -135,7 +135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67058068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -1.286, z: 0}
+  m_LocalPosition: {x: -5, y: -1.627, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1144150402}
@@ -458,6 +458,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _groundCheck: {fileID: 1144150404}
+  _foorStepParticle: {fileID: 2066881416}
 --- !u!114 &67058075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -1.286, z: -10}
+  m_LocalPosition: {x: -5.0012264, y: -1.609078, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2275,7 +2276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908353039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -1.286, z: -10}
+  m_LocalPosition: {x: -5, y: -1.627, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1797326520}
@@ -6503,7 +6504,18 @@ MonoBehaviour:
   _tag: Player
   _action:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1960842830}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!60 &1960842832
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6529,12 +6541,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 31.2236, y: -4.354844}
-      - {x: 31.144651, y: -2.9073253}
+    - - {x: 37.293945, y: -4.577317}
+      - {x: 37.27856, y: -2.8119798}
       - {x: 14.471656, y: -2.8415856}
       - {x: 14.4976635, y: 0.42646623}
-      - {x: -7.100614, y: 0.37274268}
-      - {x: -7.215345, y: -3.9229722}
+      - {x: -11.426949, y: 0.43930152}
+      - {x: -11.408558, y: -3.590178}
       - {x: -1.5181975, y: -4.44681}
       - {x: 1.7274948, y: -4.637501}
       - {x: 15.082048, y: -4.5964246}
