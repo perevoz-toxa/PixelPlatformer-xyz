@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-
-
-public class DestroyObjectComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private GameObject _objectToDestroy;
-
-    public void DestroyObject()
+    public class DestroyObjectComponent : MonoBehaviour
     {
-        Destroy(_objectToDestroy);
+        [SerializeField] private GameObject _objectToDestroy;
+
+        public void DestroyObject()
+        {
+            Destroy(_objectToDestroy);
+        }
     }
 }

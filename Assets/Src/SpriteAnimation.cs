@@ -3,90 +3,94 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System;
 
-[RequireComponent(typeof(SpriteRenderer))]
 
-public class SpriteAnimation : MonoBehaviour
+namespace Assets.Src
 {
-    [SerializeField] private int _frameRate;
-    [SerializeField] private List<SpriteClip> _clips;
-    [SerializeField] private string _currentClipName;
-    [SerializeField] private UnityEvent _onComplete;
+    [RequireComponent(typeof(SpriteRenderer))]
 
-    private SpriteRenderer _renderer;
-    private float _secondsPerFrame;
-    private int _currentSpriteIndex;
-    private float _nextFrameTime;
-    private SpriteClip _currentClip;
-
-    private bool _isPlaying = true;
-
-    private void Start()
+    public class SpriteAnimation : MonoBehaviour
     {
-        _renderer = GetComponent<SpriteRenderer>();
-        _secondsPerFrame = 1f / _frameRate;
-        _nextFrameTime = Time.time + _secondsPerFrame;
-        SetClip(_currentClipName);
-    }
+        [SerializeField] private int _frameRate;
+        [SerializeField] private List<SpriteClip> _clips;
+        [SerializeField] private string _currentClipName;
+        [SerializeField] private UnityEvent _onComplete;
 
-    private void Update()
-    {
-        if (!_isPlaying || _nextFrameTime > Time.time) return;
+        private SpriteRenderer _renderer;
+        private float _secondsPerFrame;
+        private int _currentSpriteIndex;
+        private float _nextFrameTime;
+        private SpriteClip _currentClip;
 
-        if (_currentSpriteIndex >= _currentClip.Sprites.Length)
+        private bool _isPlaying = true;
+
+        private void Start()
         {
-            if (_currentClip.Loop)
+            _renderer = GetComponent<SpriteRenderer>();
+            _secondsPerFrame = 1f / _frameRate;
+            _nextFrameTime = Time.time + _secondsPerFrame;
+            SetClip(_currentClipName);
+        }
+
+        private void Update()
+        {
+            if (!_isPlaying || _nextFrameTime > Time.time) return;
+
+            if (_currentSpriteIndex >= _currentClip.Sprites.Length)
             {
-                _currentSpriteIndex = 0;
-            }
-            else
-            {
-                if (_currentClip.AllowNext)
+                if (_currentClip.Loop)
                 {
-                    int currentIndex = _clips.IndexOf(_currentClip);
-                    if (currentIndex >= 0 && currentIndex < _clips.Count - 1)
-                    {
-                        SetClip(_clips[currentIndex + 1].Name);
-                    }
+                    _currentSpriteIndex = 0;
                 }
                 else
                 {
-                    _isPlaying = false;
-                    _onComplete?.Invoke();
-                    return;
+                    if (_currentClip.AllowNext)
+                    {
+                        int currentIndex = _clips.IndexOf(_currentClip);
+                        if (currentIndex >= 0 && currentIndex < _clips.Count - 1)
+                        {
+                            SetClip(_clips[currentIndex + 1].Name);
+                        }
+                    }
+                    else
+                    {
+                        _isPlaying = false;
+                        _onComplete?.Invoke();
+                        return;
+                    }
                 }
             }
+
+            _renderer.sprite = _currentClip.Sprites[_currentSpriteIndex];
+            _nextFrameTime += _secondsPerFrame;
+            _currentSpriteIndex++;
         }
 
-        _renderer.sprite = _currentClip.Sprites[_currentSpriteIndex];
-        _nextFrameTime += _secondsPerFrame;
-        _currentSpriteIndex++;
-    }
-
-    public void SetClip(string clipName)
-    {
-        _currentClip = _clips.Find(c => c.Name == clipName);
-        if (_currentClip == null)
+        public void SetClip(string clipName)
         {
-            Debug.LogWarning($"Clip '{clipName}' not found!");
-            return;
+            _currentClip = _clips.Find(c => c.Name == clipName);
+            if (_currentClip == null)
+            {
+                Debug.LogWarning($"Clip '{clipName}' not found!");
+                return;
+            }
+            _currentSpriteIndex = 0;
+            _isPlaying = true;
+            _nextFrameTime = Time.time + _secondsPerFrame;
+            _renderer.sprite = _currentClip.Sprites[0];
         }
-        _currentSpriteIndex = 0;
-        _isPlaying = true;
-        _nextFrameTime = Time.time + _secondsPerFrame;
-        _renderer.sprite = _currentClip.Sprites[0];
     }
-}
 
-[Serializable]
-public class SpriteClip
-{
-    [SerializeField] private string _name;
-    [SerializeField] private Sprite[] _sprites;
-    [SerializeField] private bool _loop;
-    [SerializeField] private bool _allowNext;
+    [Serializable]
+    public class SpriteClip
+    {
+        [SerializeField] private string _name;
+        [SerializeField] private Sprite[] _sprites;
+        [SerializeField] private bool _loop;
+        [SerializeField] private bool _allowNext;
 
-    public string Name => _name;
-    public Sprite[] Sprites => _sprites;
-    public bool Loop => _loop;
-    public bool AllowNext => _allowNext;
+        public string Name => _name;
+        public Sprite[] Sprites => _sprites;
+        public bool Loop => _loop;
+        public bool AllowNext => _allowNext;
+    }
 }

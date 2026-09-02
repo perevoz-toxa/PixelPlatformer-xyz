@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class CollectComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private int _value;
-
-    public void Collect()
+    public class CollectComponent : MonoBehaviour
     {
-        var counter = FindObjectOfType<CoinsCounter>();
-        if (counter != null)
+        [SerializeField] private int _value;
+
+        public void Collect()
         {
-            counter.Add(_value);
+            var counter = FindObjectOfType<CoinsCounter>();
+            if (counter != null)
+            {
+                counter.Add(_value);
+            }
         }
     }
 }

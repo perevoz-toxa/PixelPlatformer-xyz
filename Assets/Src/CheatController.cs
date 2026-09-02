@@ -3,60 +3,63 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[Serializable]
-public class CheatItem
+namespace Assets.Src
 {
-    public string Name;
-    public UnityEvent Action;
-}
-
-
-public class CheatController : MonoBehaviour
-{
-    private string _currentInput;
-    [SerializeField] private float _inputTimeToLive;
-    [SerializeField] private CheatItem[] _cheats;
-
-    private float _inputTime;
-
-    private void Awake()
+    [Serializable]
+    public class CheatItem
     {
-        Keyboard.current.onTextInput += OnTextInput;
+        public string Name;
+        public UnityEvent Action;
     }
 
-    private void OnDestroy()
-    {
-        Keyboard.current.onTextInput -= OnTextInput;
-    }
 
-    private void OnTextInput(char inputChar)
+    public class CheatController : MonoBehaviour
     {
-        _currentInput += inputChar;
-        _inputTime = _inputTimeToLive;
-        FindAnyCheats();
-    }
+        private string _currentInput;
+        [SerializeField] private float _inputTimeToLive;
+        [SerializeField] private CheatItem[] _cheats;
 
-    private void FindAnyCheats()
-    {
-        foreach (var cheatItem in _cheats)
+        private float _inputTime;
+
+        private void Awake()
         {
-            if (_currentInput.Contains(cheatItem.Name))
+            Keyboard.current.onTextInput += OnTextInput;
+        }
+
+        private void OnDestroy()
+        {
+            Keyboard.current.onTextInput -= OnTextInput;
+        }
+
+        private void OnTextInput(char inputChar)
+        {
+            _currentInput += inputChar;
+            _inputTime = _inputTimeToLive;
+            FindAnyCheats();
+        }
+
+        private void FindAnyCheats()
+        {
+            foreach (var cheatItem in _cheats)
             {
-                cheatItem.Action?.Invoke();
-                _currentInput = string.Empty;
+                if (_currentInput.Contains(cheatItem.Name))
+                {
+                    cheatItem.Action?.Invoke();
+                    _currentInput = string.Empty;
+                }
             }
         }
-    }
 
-    private void Update()
-    {
-        if (_inputTime < 0)
+        private void Update()
         {
-            _currentInput = string.Empty;
-        }
-        else
-        {
-            _inputTime -= Time.deltaTime;
+            if (_inputTime < 0)
+            {
+                _currentInput = string.Empty;
+            }
+            else
+            {
+                _inputTime -= Time.deltaTime;
+            }
         }
     }
 }

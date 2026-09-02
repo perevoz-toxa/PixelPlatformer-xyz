@@ -1,18 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HealthEffectComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private int _effectValue;
-
-    public void ApplyEffectToTarget(GameObject target)
+    public class HealthEffectComponent : MonoBehaviour
     {
-        if (target != null)
+        [SerializeField] private int _effectValue;
+
+        public void ApplyEffectToTarget(GameObject target)
         {
-            var healthComponent = target.GetComponent<HealthComponent>();
             if (target != null)
             {
-                healthComponent.ModifyHealth(_effectValue);
+                var healthComponent = target.GetComponent<HealthComponent>();
+                if (target != null)
+                {
+                    healthComponent.ModifyHealth(_effectValue);
+                }
             }
         }
     }

@@ -122,6 +122,9 @@ MonoBehaviour:
   _interactionLayer:
     serializedVersion: 2
     m_Bits: 512
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _groundCheck: {fileID: 3269329115740191209}
 --- !u!114 &3269329114340586009
 MonoBehaviour:

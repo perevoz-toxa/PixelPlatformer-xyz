@@ -1,38 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private int _health;
-    [SerializeField] private UnityEvent _onDamage;
-    [SerializeField] private UnityEvent _onHeal;
-    [SerializeField] private UnityEvent _onDie;
-
-    public void ModifyHealth(int value)
+    public class HealthComponent : MonoBehaviour
     {
-        _health += value;
-        _onHeal?.Invoke();
-        if (_health <= 0)
-        {
-            _onDie?.Invoke();
-        }
-        else
-        {
-            if (value < 0)
-            {
-                _onDamage?.Invoke();
-            }
-            else if (value > 0)
-            {
-                _onHeal?.Invoke();
-            }
-        }
-    }
+        [SerializeField] private int _health;
+        [SerializeField] private UnityEvent _onDamage;
+        [SerializeField] private UnityEvent _onHeal;
+        [SerializeField] private UnityEvent _onDie;
 
-    public void PrintHealth()
-    {
-        Debug.Log($"Health: {_health}");
+        public void ModifyHealth(int value)
+        {
+            _health += value;
+            _onHeal?.Invoke();
+            if (_health <= 0)
+            {
+                _onDie?.Invoke();
+            }
+            else
+            {
+                if (value < 0)
+                {
+                    _onDamage?.Invoke();
+                }
+                else if (value > 0)
+                {
+                    _onHeal?.Invoke();
+                }
+            }
+        }
+
+        public void PrintHealth()
+        {
+            Debug.Log($"Health: {_health}");
+        }
     }
 }

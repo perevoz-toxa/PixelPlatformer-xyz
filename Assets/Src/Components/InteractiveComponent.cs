@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class InteractiveComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private UnityEvent _action;
-
-    public void Interact()
+    public class InteractiveComponent : MonoBehaviour
     {
-        _action?.Invoke();
+        [SerializeField] private UnityEvent _action;
+
+        public void Interact()
+        {
+            _action?.Invoke();
+        }
     }
 }

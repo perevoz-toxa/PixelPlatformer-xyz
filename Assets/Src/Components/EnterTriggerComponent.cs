@@ -2,24 +2,27 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
-
-public class EnterTriggerComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private string _tag;
-    [SerializeField] private EnterTriggerEvent _action;
+    [RequireComponent(typeof(Collider2D))]
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public class EnterTriggerComponent : MonoBehaviour
     {
-        if (other.gameObject.CompareTag(_tag))
+        [SerializeField] private string _tag;
+        [SerializeField] private EnterTriggerEvent _action;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            _action?.Invoke(other.gameObject);
+            if (other.gameObject.CompareTag(_tag))
+            {
+                _action?.Invoke(other.gameObject);
+            }
         }
     }
-}
 
-[Serializable]
-public class EnterTriggerEvent : UnityEvent<GameObject>
-{
+    [Serializable]
+    public class EnterTriggerEvent : UnityEvent<GameObject>
+    {
 
+    }
 }

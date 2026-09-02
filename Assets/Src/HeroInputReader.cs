@@ -1,35 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Hero))]
-public class HeroInputReader : MonoBehaviour
+
+namespace Assets.Src
 {
-    [SerializeField] private Hero _hero;
-
-    private void Update()
+    [RequireComponent(typeof(Hero))]
+    public class HeroInputReader : MonoBehaviour
     {
+        [SerializeField] private Hero _hero;
 
-    }
-
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        var direction = context.ReadValue<Vector2>();
-        _hero.SetDirection(direction);
-    }
-
-    public void OnSaySomething(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
+        private void Update()
         {
-            _hero.SaySomething();
+
         }
-    }
 
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
+        public void OnMovement(InputAction.CallbackContext context)
         {
-            _hero.Interact();
+            var direction = context.ReadValue<Vector2>();
+            _hero.SetDirection(direction);
+        }
+
+        public void OnSaySomething(InputAction.CallbackContext context)
+        {
+            if (context.canceled)
+            {
+                _hero.SaySomething();
+            }
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (context.canceled)
+            {
+                _hero.Interact();
+            }
         }
     }
 }

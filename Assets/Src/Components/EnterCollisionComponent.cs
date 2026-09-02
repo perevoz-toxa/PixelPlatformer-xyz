@@ -2,22 +2,25 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnterCollisionComponent : MonoBehaviour
+namespace Assets.Src.Components
 {
-    [SerializeField] private string _tag;
-    [SerializeField] private EnterCollisionEvent _action;
-
-    private void OnCollisionEnter2D(Collision2D other)
+    public class EnterCollisionComponent : MonoBehaviour
     {
-        if (other.gameObject.CompareTag(_tag))
+        [SerializeField] private string _tag;
+        [SerializeField] private EnterCollisionEvent _action;
+
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            _action?.Invoke(other.gameObject);
+            if (other.gameObject.CompareTag(_tag))
+            {
+                _action?.Invoke(other.gameObject);
+            }
         }
     }
-}
 
-[Serializable]
-public class EnterCollisionEvent : UnityEvent<GameObject>
-{
+    [Serializable]
+    public class EnterCollisionEvent : UnityEvent<GameObject>
+    {
 
+    }
 }

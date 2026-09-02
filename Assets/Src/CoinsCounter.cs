@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class CoinsCounter : MonoBehaviour
+namespace Assets.Src
 {
-    public int Count { get; private set; } = 0;
-
-    public void Add(int value)
+    public class CoinsCounter : MonoBehaviour
     {
-        Count += value;
-        Debug.Log($"Coins: {Count}");
+        public int Count { get; private set; } = 0;
+
+        public void Add(int value)
+        {
+            Count += value;
+            Debug.Log($"Coins: {Count}");
+        }
     }
 }
