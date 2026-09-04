@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Src.Components;
 using System;
+using Assets.Src.Utils;
 
 namespace Assets.Src
 {
@@ -12,11 +13,17 @@ namespace Assets.Src
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpSpeed;
         [SerializeField] private float _damageJumpSpeed;
+        [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _interactionRadius;
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
-        [SerializeField] private SpawnComponent _foorStepParticle;
+
+        [Space]
+        [Header("Particles")]
+        [SerializeField] private SpawnComponent _foorStepParticles;
+        [SerializeField] private SpawnComponent _jumpParticles;
+        [SerializeField] private SpawnComponent _slamDownParticles;
         [SerializeField] private ParticleSystem _coinsParticleSystem;
 
         private Rigidbody2D _rigidbody;
@@ -91,10 +98,12 @@ namespace Assets.Src
             if (_isGrounded)
             {
                 yVelocity += _jumpSpeed;
+                _jumpParticles.Spawn();
             }
             else if (_allowDoubleJump)
             {
                 yVelocity = _jumpSpeed;
+                _jumpParticles.Spawn();
                 _allowDoubleJump = false;
             }
 
@@ -116,6 +125,20 @@ namespace Assets.Src
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.IsInLayer(_groundLayer))
+            {
+                var contact = collision.contacts[0];
+                if (contact.relativeVelocity.y >= _slamDownVelocity)
+                {
+                    _slamDownParticles.Spawn();
+                }
+            }
+
+
         }
 
         public void SaySomething()
@@ -171,7 +194,7 @@ namespace Assets.Src
 
         public void SpawnFootDust()
         {
-            _foorStepParticle.Spawn();
+            _foorStepParticles.Spawn();
         }
     }
 

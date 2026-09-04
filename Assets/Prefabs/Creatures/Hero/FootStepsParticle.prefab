@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6114094831650339626}
   - component: {fileID: 6288279767665979147}
   m_Layer: 0
-  m_Name: FootSteps
+  m_Name: FootStepsParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
