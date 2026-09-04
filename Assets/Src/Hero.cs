@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Src.Components;
+using System;
 
 namespace Assets.Src
 {
@@ -16,10 +17,12 @@ namespace Assets.Src
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
         [SerializeField] private SpawnComponent _foorStepParticle;
+        [SerializeField] private ParticleSystem _coinsParticleSystem;
 
         private Rigidbody2D _rigidbody;
         private Vector2 _direction;
         private Animator _animator;
+        private CoinsCounter _coinsCounter;
         private bool _isGrounded;
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
@@ -33,6 +36,7 @@ namespace Assets.Src
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _coinsCounter = GetComponent<CoinsCounter>();
         }
 
         public void SetDirection(Vector2 direction)
@@ -126,6 +130,24 @@ namespace Assets.Src
                 _rigidbody.velocity.x,
                 _damageJumpSpeed
                 );
+
+            if (_coinsCounter.Count > 0)
+            {
+                SpawnCoins();
+            }
+        }
+
+        private void SpawnCoins()
+        {
+            var numCoinsToDispose = Math.Min(_coinsCounter.Count, 5);
+            _coinsCounter.Count -= numCoinsToDispose;
+
+            var burst = _coinsParticleSystem.emission.GetBurst(0);
+            burst.count = numCoinsToDispose;
+            _coinsParticleSystem.emission.SetBurst(0, burst);
+
+            _coinsParticleSystem.gameObject.SetActive(true);
+            _coinsParticleSystem.Play();
         }
 
         public void Interact()

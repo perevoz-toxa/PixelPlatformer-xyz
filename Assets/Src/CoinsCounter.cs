@@ -4,12 +4,21 @@ namespace Assets.Src
 {
     public class CoinsCounter : MonoBehaviour
     {
-        public int Count { get; private set; } = 0;
+        private int _count;
+
+        public int Count
+        {
+            get => _count;
+            set
+            {
+                _count = value;
+                Debug.Log($"Coins: {_count}");
+            }
+        }
 
         public void Add(int value)
         {
             Count += value;
-            Debug.Log($"Coins: {Count}");
         }
     }
 }
