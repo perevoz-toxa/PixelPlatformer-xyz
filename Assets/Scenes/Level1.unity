@@ -430,7 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _jumpSpeed: 12
-  _damageJumpSpeed: 60
+  _damageJumpSpeed: 15
   _slamDownVelocity: 15
   _interactionRadius: 1
   _interactionLayer:
