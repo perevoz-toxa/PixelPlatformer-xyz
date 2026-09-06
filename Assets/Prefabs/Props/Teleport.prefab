@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destTransform: {fileID: 0}
+  _alphaTime: 0.6
+  _moveTime: 0.6
 --- !u!58 &9218573916450487554
 CircleCollider2D:
   m_ObjectHideFlags: 0
