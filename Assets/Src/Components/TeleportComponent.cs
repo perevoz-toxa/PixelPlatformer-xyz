@@ -21,9 +21,19 @@ namespace Assets.Src.Components
             var sprite = target.GetComponent<SpriteRenderer>();
 
             /** Fade out */
-            yield return SetAlpha(sprite, 0);
+            yield return AlphaAnimation(sprite, 0);
+            target.SetActive(false);
 
             /** Move to destination */
+            yield return MoveAnimation(target);
+
+            /** Fade in */
+            target.SetActive(true);
+            yield return AlphaAnimation(sprite, 1);
+        }
+
+        private IEnumerator MoveAnimation(GameObject target)
+        {
             var moveTime = 0f;
             while (moveTime < _moveTime)
             {
@@ -33,12 +43,9 @@ namespace Assets.Src.Components
 
                 yield return null;
             }
-
-            /** Fade in */
-            yield return SetAlpha(sprite, 1);
         }
 
-        private IEnumerator SetAlpha(SpriteRenderer sprite, float destAlpha)
+        private IEnumerator AlphaAnimation(SpriteRenderer sprite, float destAlpha)
         {
             var time = 0f;
             var spriteAlpha = sprite.color.a;
