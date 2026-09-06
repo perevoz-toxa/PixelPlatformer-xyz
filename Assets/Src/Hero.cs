@@ -133,7 +133,7 @@ namespace Assets.Src
             }
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.IsInLayer(_groundLayer))
             {
@@ -143,8 +143,6 @@ namespace Assets.Src
                     _slamDownParticles.Spawn();
                 }
             }
-
-
         }
 
         public void SaySomething()
@@ -178,6 +176,13 @@ namespace Assets.Src
 
             _coinsParticleSystem.gameObject.SetActive(true);
             _coinsParticleSystem.Play();
+            StartCoroutine(DisableCoinsParticleAfterFinish());
+        }
+
+        private System.Collections.IEnumerator DisableCoinsParticleAfterFinish()
+        {
+            yield return new WaitForSeconds(_coinsParticleSystem.main.duration);
+            _coinsParticleSystem.gameObject.SetActive(false);
         }
 
         public void Interact()

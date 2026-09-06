@@ -9,11 +9,6 @@ namespace Assets.Src
     {
         [SerializeField] private Hero _hero;
 
-        private void Update()
-        {
-
-        }
-
         public void OnMovement(InputAction.CallbackContext context)
         {
             var direction = context.ReadValue<Vector2>();

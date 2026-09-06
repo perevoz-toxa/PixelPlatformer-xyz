@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Src.Components
 {
@@ -19,6 +20,10 @@ namespace Assets.Src.Components
         private IEnumerator AnimateTeleport(GameObject target)
         {
             var sprite = target.GetComponent<SpriteRenderer>();
+            var playerInput = target.GetComponent<PlayerInput>();
+
+            /** Locking Input */
+            SetLockInput(playerInput, true);
 
             /** Fade out */
             yield return AlphaAnimation(sprite, 0);
@@ -30,6 +35,17 @@ namespace Assets.Src.Components
             /** Fade in */
             target.SetActive(true);
             yield return AlphaAnimation(sprite, 1);
+
+            /** unlocking Input */
+            SetLockInput(playerInput, false);
+        }
+
+        private void SetLockInput(PlayerInput playerInput, bool isLocked)
+        {
+            if (playerInput != null)
+            {
+                playerInput.enabled = !isLocked;
+            }
         }
 
         private IEnumerator MoveAnimation(GameObject target)
