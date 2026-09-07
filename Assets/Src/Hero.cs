@@ -59,6 +59,7 @@ namespace Assets.Src
 
         private void FixedUpdate()
         {
+            if (_rigidbody.bodyType == RigidbodyType2D.Static) return;
 
             var xVelocity = _direction.x * _speed;
             var yVelocity = CalculateYVelocity();

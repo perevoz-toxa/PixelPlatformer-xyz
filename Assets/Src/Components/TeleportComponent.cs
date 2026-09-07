@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace Assets.Src.Components
 {
@@ -25,6 +26,9 @@ namespace Assets.Src.Components
             /** Locking Input */
             SetLockInput(playerInput, true);
 
+            /** Lock Physics */
+            SetLockPhysics(target, true);
+
             /** Fade out */
             yield return AlphaAnimation(sprite, 0);
             target.SetActive(false);
@@ -36,7 +40,10 @@ namespace Assets.Src.Components
             target.SetActive(true);
             yield return AlphaAnimation(sprite, 1);
 
-            /** unlocking Input */
+            /** Unlock Physics */
+            SetLockPhysics(target, false);
+
+            /** Unlocking Input */
             SetLockInput(playerInput, false);
         }
 
@@ -45,6 +52,18 @@ namespace Assets.Src.Components
             if (playerInput != null)
             {
                 playerInput.enabled = !isLocked;
+            }
+        }
+
+        private void SetLockPhysics(GameObject target, bool isLocked)
+        {
+            if (target != null)
+            {
+                var rigidbody = target.GetComponent<Rigidbody2D>();
+                if (rigidbody != null)
+                {
+                    rigidbody.bodyType = isLocked ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
+                }
             }
         }
 
