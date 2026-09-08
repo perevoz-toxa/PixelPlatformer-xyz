@@ -68,6 +68,7 @@ namespace Assets.Src.Components
                 else
                 {
                     _isPlaying = false;
+                    _onComplete?.Invoke();
                 }
             }
         }
