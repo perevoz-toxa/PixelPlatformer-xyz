@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System;
 
 
-namespace Assets.Src
+namespace Assets.Src.Components
 {
     [RequireComponent(typeof(SpriteRenderer))]
 
-    public class SpriteAnimation : MonoBehaviour
+    public class SpriteAnimationComponent : MonoBehaviour
     {
         [SerializeField] private int _frameRate;
         [SerializeField] private List<SpriteClip> _clips;
@@ -31,38 +31,45 @@ namespace Assets.Src
             SetClip(_currentClipName);
         }
 
+        private void OnBecameVisible()
+        {
+            enabled = _isPlaying;
+        }
+
+        private void OnBecameInvisible()
+        {
+            enabled = false;
+        }
+
         private void Update()
         {
             if (!_isPlaying || _nextFrameTime > Time.time) return;
 
+            _renderer.sprite = _currentClip.Sprites[_currentSpriteIndex];
+            _nextFrameTime += _secondsPerFrame;
+            _currentSpriteIndex++;
+
+            // Проверка завершения после инкремента
             if (_currentSpriteIndex >= _currentClip.Sprites.Length)
             {
+                _currentClip.OnComplete?.Invoke();
                 if (_currentClip.Loop)
                 {
                     _currentSpriteIndex = 0;
                 }
-                else
+                else if (_currentClip.AllowNext)
                 {
-                    if (_currentClip.AllowNext)
+                    int currentIndex = _clips.IndexOf(_currentClip);
+                    if (currentIndex >= 0 && currentIndex < _clips.Count - 1)
                     {
-                        int currentIndex = _clips.IndexOf(_currentClip);
-                        if (currentIndex >= 0 && currentIndex < _clips.Count - 1)
-                        {
-                            SetClip(_clips[currentIndex + 1].Name);
-                        }
-                    }
-                    else
-                    {
-                        _isPlaying = false;
-                        _onComplete?.Invoke();
-                        return;
+                        SetClip(_clips[currentIndex + 1].Name);
                     }
                 }
+                else
+                {
+                    _isPlaying = false;
+                }
             }
-
-            _renderer.sprite = _currentClip.Sprites[_currentSpriteIndex];
-            _nextFrameTime += _secondsPerFrame;
-            _currentSpriteIndex++;
         }
 
         public void SetClip(string clipName)
@@ -87,10 +94,12 @@ namespace Assets.Src
         [SerializeField] private Sprite[] _sprites;
         [SerializeField] private bool _loop;
         [SerializeField] private bool _allowNext;
+        [SerializeField] private UnityEvent _onComplete;
 
         public string Name => _name;
         public Sprite[] Sprites => _sprites;
         public bool Loop => _loop;
         public bool AllowNext => _allowNext;
+        public UnityEvent OnComplete => _onComplete;
     }
 }
