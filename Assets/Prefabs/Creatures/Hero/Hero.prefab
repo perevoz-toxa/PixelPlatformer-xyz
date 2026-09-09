@@ -41,6 +41,7 @@ Transform:
   - {fileID: 554974808303097111}
   - {fileID: 554974807773148807}
   - {fileID: 554974808208548070}
+  - {fileID: 5866332863182606150}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,6 +123,7 @@ MonoBehaviour:
   _speed: 3
   _jumpSpeed: 12
   _damageJumpSpeed: 15
+  _damage: 30
   _slamDownVelocity: 15
   _interactionRadius: 1
   _interactionLayer:
@@ -131,6 +133,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _groundCheck: {fileID: 554974808579988752}
+  _attackRange: {fileID: 7137017491260806537}
   _foorStepParticles: {fileID: 554974808428977948}
   _jumpParticles: {fileID: 554974808303097104}
   _slamDownParticles: {fileID: 554974807773148800}
@@ -206,6 +209,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 86cdbc41-4709-4822-806a-8584ef5ba902
     m_ActionName: Hero/Interact[/Keyboard/space,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 554974807485988111}
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b2a3c5cf-f8f7-49ed-9183-2a0d9fb9c1be
+    m_ActionName: Hero/Attack[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
@@ -258,7 +276,7 @@ Animator:
   m_GameObject: {fileID: 554974807485988096}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90, type: 2}
+  m_Controller: {fileID: 9100000, guid: 93a402d4ce2662740bdf1a77f91497c7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5316,7 +5334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   IsTouchingLayer: 0
 --- !u!58 &554974808579988759
 CircleCollider2D:
@@ -5334,3 +5352,48 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.16248953}
   serializedVersion: 2
   m_Radius: 0.27732956
+--- !u!1 &4514333241601021389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5866332863182606150}
+  - component: {fileID: 7137017491260806537}
+  m_Layer: 0
+  m_Name: AttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5866332863182606150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514333241601021389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.397, y: -0.036, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 554974807492704260}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7137017491260806537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514333241601021389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8386f942b8a452f49bd31791020544d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 1
+  _tag: Enemy

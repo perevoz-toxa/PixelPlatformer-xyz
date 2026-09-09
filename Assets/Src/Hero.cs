@@ -13,11 +13,13 @@ namespace Assets.Src
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpSpeed;
         [SerializeField] private float _damageJumpSpeed;
+        [SerializeField] private int _damage;
         [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _interactionRadius;
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
+        [SerializeField] private CheckCircleOverlap _attackRange;
 
         [Space]
         [Header("Particles")]
@@ -34,11 +36,11 @@ namespace Assets.Src
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
         private bool _isJumping;
-
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
         private static readonly int verticalVelocityKey = Animator.StringToHash("verticalVelocity");
         private static readonly int hitKey = Animator.StringToHash("hit");
+        private static readonly int attackKey = Animator.StringToHash("attack");
 
         private void Awake()
         {
@@ -201,6 +203,24 @@ namespace Assets.Src
                 if (interactable != null)
                 {
                     interactable.Interact();
+                }
+            }
+        }
+
+        public void Attack()
+        {
+            _animator.SetTrigger(attackKey);
+        }
+
+        public void OnAttackAnimationTrigger()
+        {
+            var gos = _attackRange.GetObjectsInRange();
+            foreach (var go in gos)
+            {
+                var health = go.GetComponent<HealthComponent>();
+                if (health != null)
+                {
+                    health.ModifyHealth(-_damage);
                 }
             }
         }
