@@ -503,7 +503,7 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.21
-  m_DeadZoneHeight: 0
+  m_DeadZoneHeight: 0.6
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -1067,7 +1067,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2777,7 +2777,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1615267976}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 3
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -6350,6 +6350,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 6.913412, y: 1}
+      - {x: 6.931674, y: -0.4518423}
+      - {x: 0.9337386, y: -0.5049038}
+      - {x: 0.97144115, y: 1.008152}
       - {x: -2.8555062, y: 1.0134017}
       - {x: -2.8574703, y: -0.7046641}
       - {x: 31.33244, y: -0.7466984}
