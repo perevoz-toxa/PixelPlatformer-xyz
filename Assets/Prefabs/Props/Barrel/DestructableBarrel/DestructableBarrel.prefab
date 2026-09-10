@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 991523593881016294}
   - component: {fileID: 5575392087177906465}
   - component: {fileID: 7223294416410028287}
+  - component: {fileID: 8809839171956849097}
   m_Layer: 11
   m_Name: DestructableBarrel
   m_TagString: Enemy
@@ -141,6 +142,17 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 7223294416410028287}
           m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8809839171956849097}
+          m_MethodName: SpawnDroppable
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -283,3 +295,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 991523594641653853}
   _prefab: {fileID: 1968147667363460620, guid: 5cd87eaf59abee241bf6c68962b6e9f7, type: 3}
+--- !u!114 &8809839171956849097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991523594641653848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad4f3149a729fa46b55b6170dcc2329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetPosition: {fileID: 991523594641653853}
+  _droppableProps:
+  - _prefab: {fileID: 1537293520904213986, guid: efd2ddf11813a5e4bb7b2df5d077ac25,
+      type: 3}
+    _dropChancePercent: 90
+    _maxSpawnCount: 3
+  - _prefab: {fileID: 296683656963186767, guid: b28e0a9de9d1e534d9b86e8645984844,
+      type: 3}
+    _dropChancePercent: 10
+    _maxSpawnCount: 1

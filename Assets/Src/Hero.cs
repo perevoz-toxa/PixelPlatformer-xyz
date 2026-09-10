@@ -30,6 +30,7 @@ namespace Assets.Src
         [SerializeField] private SpawnComponent _jumpParticles;
         [SerializeField] private SpawnComponent _slamDownParticles;
         [SerializeField] private ParticleSystem _coinsParticleSystem;
+        [SerializeField] private SpawnComponent _swordEffectsParticles;
 
         private Rigidbody2D _rigidbody;
         private Vector2 _direction;
@@ -216,6 +217,7 @@ namespace Assets.Src
             if (!_isArmed) return;
 
             _animator.SetTrigger(attackKey);
+            _swordEffectsParticles.Spawn();
         }
 
         public void ApplyAttackEffect()
