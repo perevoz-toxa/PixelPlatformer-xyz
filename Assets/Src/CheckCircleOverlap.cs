@@ -31,10 +31,13 @@ namespace Assets.Src
             return overlaps.ToArray();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             Handles.color = Utils.HandlesUtils.TransparentGreen;
             Handles.DrawSolidDisc(transform.position, Vector3.forward, _radius);
         }
+#endif
+
     }
 }

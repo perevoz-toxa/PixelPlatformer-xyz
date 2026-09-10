@@ -218,7 +218,7 @@ namespace Assets.Src
             _animator.SetTrigger(attackKey);
         }
 
-        public void OnAttackAnimationTrigger()
+        public void ApplyAttackEffect()
         {
             var gos = _attackRange.GetObjectsInRange();
             foreach (var go in gos)
