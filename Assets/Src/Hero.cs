@@ -2,6 +2,7 @@
 using Assets.Src.Components;
 using System;
 using Assets.Src.Utils;
+using UnityEditor.Animations;
 
 namespace Assets.Src
 {
@@ -19,6 +20,8 @@ namespace Assets.Src
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
+        [SerializeField] private AnimatorController _armedAnimatorController;
+        [SerializeField] private AnimatorController _unarmedAnimatorController;
         [SerializeField] private CheckCircleOverlap _attackRange;
 
         [Space]
@@ -36,6 +39,7 @@ namespace Assets.Src
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
         private bool _isJumping;
+        private bool _isArmed;
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
         private static readonly int verticalVelocityKey = Animator.StringToHash("verticalVelocity");
@@ -209,6 +213,8 @@ namespace Assets.Src
 
         public void Attack()
         {
+            if (!_isArmed) return;
+
             _animator.SetTrigger(attackKey);
         }
 
@@ -228,6 +234,12 @@ namespace Assets.Src
         public void SpawnFootDust()
         {
             _foorStepParticles.Spawn();
+        }
+
+        public void ArmHero()
+        {
+            _isArmed = true;
+            _animator.runtimeAnimatorController = _armedAnimatorController;
         }
     }
 

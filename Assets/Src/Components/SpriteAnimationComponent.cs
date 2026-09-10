@@ -31,16 +31,6 @@ namespace Assets.Src.Components
             SetClip(_currentClipName);
         }
 
-        private void OnBecameVisible()
-        {
-            enabled = _isPlaying;
-        }
-
-        private void OnBecameInvisible()
-        {
-            enabled = false;
-        }
-
         private void Update()
         {
             if (!_isPlaying || _nextFrameTime > Time.time) return;

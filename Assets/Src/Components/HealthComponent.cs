@@ -13,7 +13,7 @@ namespace Assets.Src.Components
             set
             {
                 _health = value;
-                Debug.Log($"Health: {_health}");
+                Debug.Log($"Object: {name}, Health: {_health}");
             }
         }
 
