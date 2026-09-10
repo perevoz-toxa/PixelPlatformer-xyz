@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Src.Components
@@ -20,11 +21,13 @@ namespace Assets.Src.Components
         [SerializeField] private UnityEvent _onDamage;
         [SerializeField] private UnityEvent _onHeal;
         [SerializeField] private UnityEvent _onDie;
+        [SerializeField] private HealthChangeEvent _onChange;
 
         public void ModifyHealth(int value)
         {
             Health += value;
-            _onHeal?.Invoke();
+            _onChange?.Invoke(Health);
+
             if (_health <= 0)
             {
                 _onDie?.Invoke();
@@ -41,5 +44,11 @@ namespace Assets.Src.Components
                 }
             }
         }
+    }
+
+    [Serializable]
+    public class HealthChangeEvent : UnityEvent<int>
+    {
+
     }
 }

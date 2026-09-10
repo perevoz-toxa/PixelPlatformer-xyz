@@ -3,12 +3,14 @@ using Assets.Src.Components;
 using System;
 using Assets.Src.Utils;
 using UnityEditor.Animations;
+using Assets.Src.Model;
 
 namespace Assets.Src
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(CoinsCounter))]
     public class Hero : MonoBehaviour
     {
         [SerializeField] private float _speed;
@@ -40,7 +42,8 @@ namespace Assets.Src
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
         private bool _isJumping;
-        private bool _isArmed;
+        private GameSession _session;
+
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
         private static readonly int verticalVelocityKey = Animator.StringToHash("verticalVelocity");
@@ -54,9 +57,22 @@ namespace Assets.Src
             _coinsCounter = GetComponent<CoinsCounter>();
         }
 
-        public void SetDirection(Vector2 direction)
+        private void Start()
         {
-            _direction = direction;
+            _session = FindObjectOfType<GameSession>();
+            UpdateHeroWeapon();
+
+            var healthComponent = GetComponent<HealthComponent>();
+            if (healthComponent != null)
+            {
+                healthComponent.Health = _session.Data.Hp;
+            }
+
+            var coinsCounter = GetComponent<CoinsCounter>();
+            if (coinsCounter != null)
+            {
+                coinsCounter.Count = _session.Data.Coins;
+            }
         }
 
         private void Update()
@@ -153,24 +169,11 @@ namespace Assets.Src
             }
         }
 
-        public void SaySomething()
+        private void UpdateHeroWeapon()
         {
-            Debug.Log("I just say something. Hi! For example.");
-        }
-
-        public void TakeDamage()
-        {
-            _isJumping = false;
-            _animator.SetTrigger(hitKey);
-            _rigidbody.velocity = new Vector2(
-                _rigidbody.velocity.x,
-                _damageJumpSpeed
-                );
-
-            if (_coinsCounter.Count > 0)
-            {
-                SpawnCoins();
-            }
+            _animator.runtimeAnimatorController = _session.Data.IsArmed
+            ? _armedAnimatorController
+            : _unarmedAnimatorController;
         }
 
         private void SpawnCoins()
@@ -191,6 +194,31 @@ namespace Assets.Src
         {
             yield return new WaitForSeconds(_coinsParticleSystem.main.duration);
             _coinsParticleSystem.gameObject.SetActive(false);
+        }
+
+        public void SaySomething()
+        {
+            Debug.Log("I just say something. Hi! For example.");
+        }
+
+        public void SetDirection(Vector2 direction)
+        {
+            _direction = direction;
+        }
+
+        public void TakeDamage()
+        {
+            _isJumping = false;
+            _animator.SetTrigger(hitKey);
+            _rigidbody.velocity = new Vector2(
+                _rigidbody.velocity.x,
+                _damageJumpSpeed
+                );
+
+            if (_coinsCounter.Count > 0)
+            {
+                SpawnCoins();
+            }
         }
 
         public void Interact()
@@ -214,7 +242,7 @@ namespace Assets.Src
 
         public void Attack()
         {
-            if (!_isArmed) return;
+            if (!_session.Data.IsArmed) return;
 
             _animator.SetTrigger(attackKey);
             _swordEffectsParticles.Spawn();
@@ -240,8 +268,18 @@ namespace Assets.Src
 
         public void ArmHero()
         {
-            _isArmed = true;
-            _animator.runtimeAnimatorController = _armedAnimatorController;
+            _session.Data.IsArmed = true;
+            UpdateHeroWeapon();
+        }
+
+        public void OnHealthChange(int hp)
+        {
+            _session.Data.Hp = hp;
+        }
+
+        public void OnCoinsChange(int count)
+        {
+            _session.Data.Coins = count;
         }
     }
 
