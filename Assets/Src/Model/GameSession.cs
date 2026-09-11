@@ -32,5 +32,10 @@ namespace Assets.Src.Model
             }
             return false;
         }
+
+        public void SetData(PlayerData data)
+        {
+            _data = data;
+        }
     }
 }
