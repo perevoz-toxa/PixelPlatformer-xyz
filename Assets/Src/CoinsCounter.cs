@@ -26,11 +26,11 @@ namespace Assets.Src
         {
             Count += value;
         }
-    }
 
-    [Serializable]
-    public class CoinsChangeEvent : UnityEvent<int>
-    {
+        [Serializable]
+        public class CoinsChangeEvent : UnityEvent<int>
+        {
 
+        }
     }
 }

@@ -44,11 +44,11 @@ namespace Assets.Src.Components
                 }
             }
         }
-    }
 
-    [Serializable]
-    public class HealthChangeEvent : UnityEvent<int>
-    {
+        [Serializable]
+        public class HealthChangeEvent : UnityEvent<int>
+        {
 
+        }
     }
 }

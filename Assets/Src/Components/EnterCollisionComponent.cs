@@ -16,11 +16,11 @@ namespace Assets.Src.Components
                 _action?.Invoke(other.gameObject);
             }
         }
-    }
 
-    [Serializable]
-    public class EnterCollisionEvent : UnityEvent<GameObject>
-    {
+        [Serializable]
+        public class EnterCollisionEvent : UnityEvent<GameObject>
+        {
 
+        }
     }
 }
