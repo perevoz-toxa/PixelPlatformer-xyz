@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Assets.Src.Creatures;
 
 namespace Assets.Src.Components
 {

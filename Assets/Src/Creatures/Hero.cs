@@ -5,7 +5,7 @@ using Assets.Src.Utils;
 using UnityEditor.Animations;
 using Assets.Src.Model;
 
-namespace Assets.Src
+namespace Assets.Src.Creatures
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
@@ -15,13 +15,15 @@ namespace Assets.Src
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _jumpSpeed;
-        [SerializeField] private float _damageJumpSpeed;
+        [SerializeField] private float _damageVelocity;
         [SerializeField] private int _damage;
+        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private LayerCheck _groundCheck;
+        [SerializeField] private LayerCheck _wallCheck;
+        // ########
         [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _interactionRadius;
         [SerializeField] private LayerMask _interactionLayer;
-        [SerializeField] private LayerMask _groundLayer;
-        [SerializeField] private LayerCheck _groundCheck;
         [SerializeField] private AnimatorController _armedAnimatorController;
         [SerializeField] private AnimatorController _unarmedAnimatorController;
         [SerializeField] private CheckCircleOverlap _attackRange;
@@ -42,7 +44,9 @@ namespace Assets.Src
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
         private bool _isJumping;
+        private bool _isOnWall;
         private GameSession _session;
+        private float _defaultGravityScale;
 
         private static readonly int isRunningKey = Animator.StringToHash("isRunning");
         private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
@@ -55,6 +59,7 @@ namespace Assets.Src
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _coinsCounter = GetComponent<CoinsCounter>();
+            _defaultGravityScale = _rigidbody.gravityScale;
         }
 
         private void Start()
@@ -78,6 +83,17 @@ namespace Assets.Src
         private void Update()
         {
             _isGrounded = IsGrounded();
+
+            if (_wallCheck.IsTouchingLayer && _direction.x == transform.localScale.x)
+            {
+                _isOnWall = true;
+                _rigidbody.gravityScale = 0;
+            }
+            else
+            {
+                _isOnWall = false;
+                _rigidbody.gravityScale = _defaultGravityScale;
+            }
         }
 
         private void FixedUpdate()
@@ -107,10 +123,19 @@ namespace Assets.Src
                 _allowDoubleJump = true;
                 _isJumping = false;
             }
+            if (_isOnWall)
+            {
+                _allowDoubleJump = true;
+            }
+
             if (isJumpPressing)
             {
                 _isJumping = true;
                 yVelocity = CalculateJumpVelocity(yVelocity);
+            }
+            else if (_isOnWall)
+            {
+                yVelocity = 0f;
             }
             else if (_rigidbody.velocity.y > 0 && _isJumping)
             {
@@ -212,7 +237,7 @@ namespace Assets.Src
             _animator.SetTrigger(hitKey);
             _rigidbody.velocity = new Vector2(
                 _rigidbody.velocity.x,
-                _damageJumpSpeed
+                _damageVelocity
                 );
 
             if (_coinsCounter.Count > 0)
