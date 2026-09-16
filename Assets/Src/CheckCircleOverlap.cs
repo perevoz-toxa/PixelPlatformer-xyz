@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Assets.Src
     {
         [SerializeField] private float _radius = 1f;
         [SerializeField] private string _tag;
-        private readonly Collider2D[] _interactionResult = new Collider2D[5];
+        private readonly Collider2D[] _interactionResult = new Collider2D[25];
 
         public GameObject[] GetObjectsInRange()
         {
