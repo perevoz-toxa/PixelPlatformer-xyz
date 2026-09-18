@@ -22,5 +22,6 @@ namespace Assets.Src.Components
             var scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }
+
     }
 }

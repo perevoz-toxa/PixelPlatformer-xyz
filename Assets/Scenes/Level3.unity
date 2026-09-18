@@ -133,6 +133,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 554974807485988098, guid: 659e336ace2d716488be2fef9ace44fa,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90, type: 2}
+    - target: {fileID: 554974807485988110, guid: 659e336ace2d716488be2fef9ace44fa,
+        type: 3}
+      propertyPath: _particles
+      value: 
+      objectReference: {fileID: 1626899319}
     - target: {fileID: 554974807492704260, guid: 659e336ace2d716488be2fef9ace44fa,
         type: 3}
       propertyPath: m_RootOrder
@@ -1003,6 +1013,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 40073731}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &351754359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 554974808428977948, guid: 659e336ace2d716488be2fef9ace44fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 33965367}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc370d3c22537d4cba4f12d55416d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &470936362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3218,6 +3240,27 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &1626899309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554974807485988096, guid: 659e336ace2d716488be2fef9ace44fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 33965367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1626899319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626899309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd8a4d3bc21c2c4b9b450d65cc4a731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawners:
+  - Id: footDust
+    Component: {fileID: 351754359}
 --- !u!4 &1643641843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 991523594641653853, guid: 7350e742ed1756443be44b42bd747193,
