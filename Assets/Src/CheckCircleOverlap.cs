@@ -1,33 +1,37 @@
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Src
 {
     public class CheckCircleOverlap : MonoBehaviour
     {
         [SerializeField] private float _radius = 1f;
-        [SerializeField] private string _tag;
+        [SerializeField] private OnOverlapEvent _onOverlap;
+        [SerializeField] private string[] _tags;
+        [SerializeField] private LayerMask _mask;
         private readonly Collider2D[] _interactionResult = new Collider2D[25];
 
-        public GameObject[] GetObjectsInRange()
+        internal void Check()
         {
             var size = Physics2D.OverlapCircleNonAlloc(
-                transform.position,
-                _radius,
-                _interactionResult
-            );
+                            transform.position,
+                            _radius,
+                            _interactionResult,
+                            _mask
+                        );
 
-            var overlaps = new List<GameObject>();
             for (var i = 0; i < size; i++)
             {
-                if (_interactionResult[i].gameObject.CompareTag(_tag))
+                var overlapResult = _interactionResult[i];
+                var isInTag = _tags.Any(tag => overlapResult.CompareTag(tag));
+                if (isInTag)
                 {
-                    overlaps.Add(_interactionResult[i].gameObject);
+                    _onOverlap?.Invoke(overlapResult.gameObject);
                 }
             }
-
-            return overlaps.ToArray();
         }
 
 #if UNITY_EDITOR
@@ -38,5 +42,10 @@ namespace Assets.Src
         }
 #endif
 
+        [Serializable]
+        public class OnOverlapEvent : UnityEvent<GameObject>
+        {
+
+        }
     }
 }

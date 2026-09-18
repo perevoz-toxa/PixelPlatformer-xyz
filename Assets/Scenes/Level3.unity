@@ -203,11 +203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1049003545}
     m_Modifications:
-    - target: {fileID: 2067183810252733058, guid: 178a3d59f1c8b80428e8555f02e0b310,
-        type: 3}
-      propertyPath: _nextSceneName
-      value: Level1
-      objectReference: {fileID: 0}
     - target: {fileID: 2658726446823830159, guid: 178a3d59f1c8b80428e8555f02e0b310,
         type: 3}
       propertyPath: m_RootOrder
@@ -1069,6 +1064,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnterDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429989963361384970, guid: e93811aef92017b45ad670c6ef312584,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429989963361384970, guid: e93811aef92017b45ad670c6ef312584,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e93811aef92017b45ad670c6ef312584, type: 3}
@@ -3337,7 +3342,7 @@ MonoBehaviour:
   _data:
     Coins: 0
     Hp: 100
-    IsArmed: 1
+    IsArmed: 0
 --- !u!4 &1875250893
 Transform:
   m_ObjectHideFlags: 0

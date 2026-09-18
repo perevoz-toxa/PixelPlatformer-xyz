@@ -6,7 +6,8 @@ namespace Assets.Src.Creatures
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(CoinsCounter))]
+    [RequireComponent(typeof(SpawnListComponent))]
+    [RequireComponent(typeof(HealthComponent))]
 
     public class Creature : MonoBehaviour
     {
@@ -14,7 +15,6 @@ namespace Assets.Src.Creatures
         [SerializeField] private float _speed;
         [SerializeField] protected float _jumpSpeed;
         [SerializeField] private float _damageVelocity;
-        [SerializeField] private int _damage;
 
         [Header("Advanced")]
         [SerializeField] protected LayerMask _groundLayer;
@@ -134,20 +134,7 @@ namespace Assets.Src.Creatures
 
         public void ApplyAttackEffect()
         {
-            var gos = _attackRange.GetObjectsInRange();
-            foreach (var go in gos)
-            {
-                var health = go.GetComponent<HealthComponent>();
-                if (health != null)
-                {
-                    health.ModifyHealth(-_damage);
-                }
-            }
-        }
-
-        public void SpawnFootDust()
-        {
-            _particles.Spawn("footDust");
+            _attackRange.Check();
         }
     }
 }

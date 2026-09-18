@@ -12,6 +12,8 @@ namespace Assets.Src.Creatures
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(CoinsCounter))]
+    [RequireComponent(typeof(SpawnListComponent))]
+    [RequireComponent(typeof(HealthComponent))]
 
     public class Hero : Creature
     {
@@ -22,16 +24,15 @@ namespace Assets.Src.Creatures
 
         [Header("Hero Advanced")]
         [SerializeField] private LayerCheck _wallCheck;
-        [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private AnimatorController _armedAnimatorController;
         [SerializeField] private AnimatorController _unarmedAnimatorController;
+        [SerializeField] private CheckCircleOverlap _interactionCheck;
 
         [Header("Hero Particles")]
         [SerializeField] private ParticleSystem _coinsParticleSystem;
 
         private CoinsCounter _coinsCounter;
         private bool _allowDoubleJump;
-        private Collider2D[] _interactionResult = new Collider2D[1];
         private bool _isOnWall;
         private GameSession _session;
         private float _defaultGravityScale;
@@ -161,21 +162,7 @@ namespace Assets.Src.Creatures
 
         public void Interact()
         {
-            var size = Physics2D.OverlapCircleNonAlloc(
-                transform.position,
-                _interactionRadius,
-                _interactionResult,
-                _interactionLayer
-                );
-
-            for (int i = 0; i < size; i++)
-            {
-                var interactable = _interactionResult[i].GetComponent<InteractiveComponent>();
-                if (interactable != null)
-                {
-                    interactable.Interact();
-                }
-            }
+            _interactionCheck.Check();
         }
 
         public override void Attack()

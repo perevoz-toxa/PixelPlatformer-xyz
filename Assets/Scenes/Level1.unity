@@ -6862,16 +6862,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4514333241601021389, guid: 659e336ace2d716488be2fef9ace44fa,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137017491260806537, guid: 659e336ace2d716488be2fef9ace44fa,
-        type: 3}
-      propertyPath: _layerMask.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 659e336ace2d716488be2fef9ace44fa, type: 3}
 --- !u!1001 &991523593881016291
@@ -6890,6 +6880,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 991523594641653848, guid: 7350e742ed1756443be44b42bd747193,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 991523594641653853, guid: 7350e742ed1756443be44b42bd747193,
         type: 3}
