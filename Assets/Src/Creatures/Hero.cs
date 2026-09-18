@@ -4,6 +4,7 @@ using System;
 using Assets.Src.Utils;
 using UnityEditor.Animations;
 using Assets.Src.Model;
+using System.Collections;
 
 namespace Assets.Src.Creatures
 {
@@ -11,53 +12,35 @@ namespace Assets.Src.Creatures
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(CoinsCounter))]
-    public class Hero : MonoBehaviour
+
+    public class Hero : Creature
     {
-        [SerializeField] private float _speed;
-        [SerializeField] private float _jumpSpeed;
-        [SerializeField] private float _damageVelocity;
-        [SerializeField] private int _damage;
-        [SerializeField] private LayerMask _groundLayer;
-        [SerializeField] private LayerCheck _groundCheck;
-        [SerializeField] private LayerCheck _wallCheck;
-        // ########
-        [SerializeField] private float _slamDownVelocity;
+        [Space]
+        [Header("Hero Parameters")]
         [SerializeField] private float _interactionRadius;
+        [SerializeField] private float _slamDownVelocity;
+
+        [Header("Hero Advanced")]
+        [SerializeField] private LayerCheck _wallCheck;
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private AnimatorController _armedAnimatorController;
         [SerializeField] private AnimatorController _unarmedAnimatorController;
-        [SerializeField] private CheckCircleOverlap _attackRange;
 
-        [Space]
-        [Header("Particles")]
-        [SerializeField] private SpawnComponent _foorStepParticles;
-        [SerializeField] private SpawnComponent _jumpParticles;
-        [SerializeField] private SpawnComponent _slamDownParticles;
+        [Header("Hero Particles")]
         [SerializeField] private ParticleSystem _coinsParticleSystem;
-        [SerializeField] private SpawnComponent _swordEffectsParticles;
 
-        private Rigidbody2D _rigidbody;
-        private Vector2 _direction;
-        private Animator _animator;
         private CoinsCounter _coinsCounter;
-        private bool _isGrounded;
         private bool _allowDoubleJump;
         private Collider2D[] _interactionResult = new Collider2D[1];
-        private bool _isJumping;
         private bool _isOnWall;
         private GameSession _session;
         private float _defaultGravityScale;
 
-        private static readonly int isRunningKey = Animator.StringToHash("isRunning");
-        private static readonly int isGroundedKey = Animator.StringToHash("isGrounded");
-        private static readonly int verticalVelocityKey = Animator.StringToHash("verticalVelocity");
-        private static readonly int hitKey = Animator.StringToHash("hit");
-        private static readonly int attackKey = Animator.StringToHash("attack");
+        private static readonly int isOnWallKey = Animator.StringToHash("isOnWall");
 
-        private void Awake()
+        protected override void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            base.Awake();
             _coinsCounter = GetComponent<CoinsCounter>();
             _defaultGravityScale = _rigidbody.gravityScale;
         }
@@ -80,10 +63,9 @@ namespace Assets.Src.Creatures
             }
         }
 
-        private void Update()
+        protected override void Update()
         {
-            _isGrounded = IsGrounded();
-
+            base.Update();
             if (_wallCheck.IsTouchingLayer && _direction.x == transform.localScale.x)
             {
                 _isOnWall = true;
@@ -96,90 +78,37 @@ namespace Assets.Src.Creatures
             }
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            if (_rigidbody.bodyType == RigidbodyType2D.Static) return;
-
-            var xVelocity = _direction.x * _speed;
-            var yVelocity = CalculateYVelocity();
-            _rigidbody.velocity = new Vector2(xVelocity, yVelocity);
-
-
-
-            _animator.SetBool(isGroundedKey, _isGrounded);
-            _animator.SetFloat(verticalVelocityKey, _rigidbody.velocity.y);
-            _animator.SetBool(isRunningKey, _direction.x != 0);
-
-            UpdateSpriteDirection();
+            base.FixedUpdate();
+            _animator.SetBool(isOnWallKey, _isOnWall);
         }
 
-        private float CalculateYVelocity()
+        protected override float CalculateYVelocity()
         {
-            var yVelocity = _rigidbody.velocity.y;
             var isJumpPressing = _direction.y > 0;
 
-            if (_isGrounded)
-            {
-                _allowDoubleJump = true;
-                _isJumping = false;
-            }
-            if (_isOnWall)
+            if (_isGrounded || _isOnWall)
             {
                 _allowDoubleJump = true;
             }
-
-            if (isJumpPressing)
+            if (!isJumpPressing && _isOnWall)
             {
-                _isJumping = true;
-                yVelocity = CalculateJumpVelocity(yVelocity);
+                return 0f;
             }
-            else if (_isOnWall)
-            {
-                yVelocity = 0f;
-            }
-            else if (_rigidbody.velocity.y > 0 && _isJumping)
-            {
-                yVelocity *= 0.5f;
-            }
-
-            return yVelocity;
+            return base.CalculateYVelocity();
         }
 
-        private float CalculateJumpVelocity(float yVelocity)
+        protected override float CalculateJumpVelocity(float yVelocity)
         {
-            var isFalling = _rigidbody.velocity.y <= 0.001f;
-            if (!isFalling) return yVelocity;
-
-            if (_isGrounded)
+            if (_allowDoubleJump && !_isGrounded)
             {
-                yVelocity += _jumpSpeed;
-                _jumpParticles.Spawn();
-            }
-            else if (_allowDoubleJump)
-            {
-                yVelocity = _jumpSpeed;
-                _jumpParticles.Spawn();
+                _particles.Spawn("Jump");
                 _allowDoubleJump = false;
+                return _jumpSpeed;
             }
 
-            return yVelocity;
-        }
-
-        private bool IsGrounded()
-        {
-            return _groundCheck.IsTouchingLayer;
-        }
-
-        private void UpdateSpriteDirection()
-        {
-            if (_direction.x > 0)
-            {
-                transform.localScale = Vector3.one;
-            }
-            else if (_direction.x < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
+            return base.CalculateJumpVelocity(yVelocity);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -189,7 +118,7 @@ namespace Assets.Src.Creatures
                 var contact = collision.contacts[0];
                 if (contact.relativeVelocity.y >= _slamDownVelocity)
                 {
-                    _slamDownParticles.Spawn();
+                    _particles.Spawn("SlamDown");
                 }
             }
         }
@@ -215,31 +144,15 @@ namespace Assets.Src.Creatures
             StartCoroutine(DisableCoinsParticleAfterFinish());
         }
 
-        private System.Collections.IEnumerator DisableCoinsParticleAfterFinish()
+        private IEnumerator DisableCoinsParticleAfterFinish()
         {
             yield return new WaitForSeconds(_coinsParticleSystem.main.duration);
             _coinsParticleSystem.gameObject.SetActive(false);
         }
 
-        public void SaySomething()
+        public override void TakeDamage()
         {
-            Debug.Log("I just say something. Hi! For example.");
-        }
-
-        public void SetDirection(Vector2 direction)
-        {
-            _direction = direction;
-        }
-
-        public void TakeDamage()
-        {
-            _isJumping = false;
-            _animator.SetTrigger(hitKey);
-            _rigidbody.velocity = new Vector2(
-                _rigidbody.velocity.x,
-                _damageVelocity
-                );
-
+            base.TakeDamage();
             if (_coinsCounter.Count > 0)
             {
                 SpawnCoins();
@@ -265,30 +178,11 @@ namespace Assets.Src.Creatures
             }
         }
 
-        public void Attack()
+        public override void Attack()
         {
             if (!_session.Data.IsArmed) return;
 
-            _animator.SetTrigger(attackKey);
-            _swordEffectsParticles.Spawn();
-        }
-
-        public void ApplyAttackEffect()
-        {
-            var gos = _attackRange.GetObjectsInRange();
-            foreach (var go in gos)
-            {
-                var health = go.GetComponent<HealthComponent>();
-                if (health != null)
-                {
-                    health.ModifyHealth(-_damage);
-                }
-            }
-        }
-
-        public void SpawnFootDust()
-        {
-            _foorStepParticles.Spawn();
+            base.Attack();
         }
 
         public void ArmHero()
@@ -307,5 +201,4 @@ namespace Assets.Src.Creatures
             _session.Data.Coins = count;
         }
     }
-
 }
