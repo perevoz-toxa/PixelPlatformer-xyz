@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 554974807485988098}
   - component: {fileID: 3093224346806143519}
   - component: {fileID: 554974807485988097}
+  - component: {fileID: 1626899319}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -175,9 +176,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _groundCheck: {fileID: 554974808579988752}
-  _wallCheck: {fileID: 8561416108041535713}
-  _slamDownVelocity: 15
+  _attackRange: {fileID: 7137017491260806537}
+  _particles: {fileID: 1626899319}
   _interactionRadius: 1
+  _slamDownVelocity: 15
+  _wallCheck: {fileID: 8561416108041535713}
   _interactionLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -185,12 +188,7 @@ MonoBehaviour:
     type: 2}
   _unarmedAnimatorController: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90,
     type: 2}
-  _attackRange: {fileID: 7137017491260806537}
-  _foorStepParticles: {fileID: 554974808428977948}
-  _jumpParticles: {fileID: 554974808303097104}
-  _slamDownParticles: {fileID: 554974807773148800}
   _coinsParticleSystem: {fileID: 554974808208548069}
-  _swordEffectsParticles: {fileID: 69437212}
 --- !u!114 &554974807485988109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +420,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1626899319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554974807485988096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd8a4d3bc21c2c4b9b450d65cc4a731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawners:
+  - Id: footDust
+    Component: {fileID: 554974808428977948}
+  - Id: jump
+    Component: {fileID: 554974808303097104}
+  - Id: attack
+    Component: {fileID: 69437212}
+  - Id: slamDown
+    Component: {fileID: 554974807773148800}
 --- !u!1 &554974807773148806
 GameObject:
   m_ObjectHideFlags: 0
@@ -5413,10 +5432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bf5adc9125e4149bbf198974d0075f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
+  _layer:
     serializedVersion: 2
     m_Bits: 2304
-  IsTouchingLayer: 0
+  _isTouchingLayer: 0
 --- !u!58 &554974808579988759
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5538,7 +5557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bf5adc9125e4149bbf198974d0075f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundLayer:
+  _layer:
     serializedVersion: 2
     m_Bits: 4096
-  IsTouchingLayer: 0
+  _isTouchingLayer: 0

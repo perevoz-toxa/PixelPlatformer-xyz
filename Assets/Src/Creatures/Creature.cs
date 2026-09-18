@@ -105,7 +105,7 @@ namespace Assets.Src.Creatures
             if (_isGrounded)
             {
                 yVelocity += _jumpSpeed;
-                _particles.Spawn("Jump");
+                _particles.Spawn("jump");
             }
 
             return yVelocity;

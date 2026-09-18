@@ -103,7 +103,7 @@ namespace Assets.Src.Creatures
         {
             if (_allowDoubleJump && !_isGrounded)
             {
-                _particles.Spawn("Jump");
+                _particles.Spawn("jump");
                 _allowDoubleJump = false;
                 return _jumpSpeed;
             }
@@ -118,7 +118,7 @@ namespace Assets.Src.Creatures
                 var contact = collision.contacts[0];
                 if (contact.relativeVelocity.y >= _slamDownVelocity)
                 {
-                    _particles.Spawn("SlamDown");
+                    _particles.Spawn("slamDown");
                 }
             }
         }
