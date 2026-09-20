@@ -28,20 +28,17 @@ namespace Assets.Src.Components
             Health += value;
             _onChange?.Invoke(Health);
 
-            if (_health <= 0)
+            if (value < 0)
             {
-                _onDie?.Invoke();
+                _onDamage?.Invoke();
+                if (_health <= 0)
+                {
+                    _onDie?.Invoke();
+                }
             }
-            else
+            else if (value > 0)
             {
-                if (value < 0)
-                {
-                    _onDamage?.Invoke();
-                }
-                else if (value > 0)
-                {
-                    _onHeal?.Invoke();
-                }
+                _onHeal?.Invoke();
             }
         }
 

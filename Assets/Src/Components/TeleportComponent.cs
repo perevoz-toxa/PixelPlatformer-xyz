@@ -12,7 +12,6 @@ namespace Assets.Src.Components
 
         public void Teleport(GameObject target)
         {
-            // target.transform.position = _destTransform.position;
             StartCoroutine(AnimateTeleport(target));
         }
 

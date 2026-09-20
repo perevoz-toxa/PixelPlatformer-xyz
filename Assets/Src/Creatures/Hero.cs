@@ -2,9 +2,9 @@
 using Assets.Src.Components;
 using System;
 using Assets.Src.Utils;
-using UnityEditor.Animations;
 using Assets.Src.Model;
 using System.Collections;
+using UnityEditor.Animations;
 
 namespace Assets.Src.Creatures
 {
@@ -21,6 +21,7 @@ namespace Assets.Src.Creatures
         [Header("Hero Parameters")]
         [SerializeField] private float _interactionRadius;
         [SerializeField] private float _slamDownVelocity;
+        [SerializeField] private float _damageVelocity;
 
         [Header("Hero Advanced")]
         [SerializeField] private LayerCheck _wallCheck;
@@ -154,6 +155,10 @@ namespace Assets.Src.Creatures
         public override void TakeDamage()
         {
             base.TakeDamage();
+            _rigidbody.velocity = new Vector2(
+                _rigidbody.velocity.x,
+                _damageVelocity
+                );
             if (_coinsCounter.Count > 0)
             {
                 SpawnCoins();

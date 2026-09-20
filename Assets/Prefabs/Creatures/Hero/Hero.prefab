@@ -247,15 +247,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _jumpSpeed: 12
-  _damageVelocity: 15
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
   _groundCheck: {fileID: 554974808579988752}
   _attackRange: {fileID: 7137017491260806537}
+  _invertScale: 0
   _particles: {fileID: 1626899319}
   _interactionRadius: 1
   _slamDownVelocity: 15
+  _damageVelocity: 15
   _wallCheck: {fileID: 8561416108041535713}
   _armedAnimatorController: {fileID: 9100000, guid: 93a402d4ce2662740bdf1a77f91497c7,
     type: 2}

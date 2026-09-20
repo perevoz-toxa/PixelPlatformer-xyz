@@ -14,12 +14,12 @@ namespace Assets.Src.Creatures
         [Header("Parameters")]
         [SerializeField] private float _speed;
         [SerializeField] protected float _jumpSpeed;
-        [SerializeField] private float _damageVelocity;
 
         [Header("Advanced")]
         [SerializeField] protected LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
         [SerializeField] private CheckCircleOverlap _attackRange;
+        [SerializeField] private bool _invertScale;
 
         [Header("Particles")]
         [SerializeField] protected SpawnListComponent _particles;
@@ -38,13 +38,14 @@ namespace Assets.Src.Creatures
 
         private void UpdateSpriteDirection()
         {
+            var multiplier = _invertScale ? -1 : 1;
             if (_direction.x > 0)
             {
-                transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(multiplier, 1, 1);
             }
             else if (_direction.x < 0)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(-1 * multiplier, 1, 1);
             }
         }
 
@@ -115,10 +116,6 @@ namespace Assets.Src.Creatures
         {
             _isJumping = false;
             _animator.SetTrigger(hitKey);
-            _rigidbody.velocity = new Vector2(
-                _rigidbody.velocity.x,
-                _damageVelocity
-                );
         }
 
         public void SetDirection(Vector2 direction)
