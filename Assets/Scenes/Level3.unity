@@ -3321,6 +3321,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sharky
       objectReference: {fileID: 0}
+    - target: {fileID: 554974807485988097, guid: 36d06007846cb9b45bd2142121eaf890,
+        type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 554974807492704260, guid: 36d06007846cb9b45bd2142121eaf890,
         type: 3}
       propertyPath: m_RootOrder
