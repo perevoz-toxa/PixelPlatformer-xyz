@@ -14,23 +14,23 @@ namespace Assets.Src.Creatures
     [RequireComponent(typeof(CoinsCounter))]
     [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(HealthComponent))]
-
     public class Hero : Creature
     {
-        [Space]
-        [Header("Hero Parameters")]
-        [SerializeField] private float _interactionRadius;
+        [Space] [Header("Hero Parameters")] [SerializeField]
+        private float _interactionRadius;
+
         [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _damageVelocity;
 
-        [Header("Hero Advanced")]
-        [SerializeField] private LayerCheck _wallCheck;
+        [Header("Hero Advanced")] [SerializeField]
+        private LayerCheck _wallCheck;
+
         [SerializeField] private AnimatorController _armedAnimatorController;
         [SerializeField] private AnimatorController _unarmedAnimatorController;
         [SerializeField] private CheckCircleOverlap _interactionCheck;
 
-        [Header("Hero Particles")]
-        [SerializeField] private ParticleSystem _coinsParticleSystem;
+        [Header("Hero Particles")] [SerializeField]
+        private ParticleSystem _coinsParticleSystem;
 
         private CoinsCounter _coinsCounter;
         private bool _allowDoubleJump;
@@ -39,6 +39,7 @@ namespace Assets.Src.Creatures
         private float _defaultGravityScale;
 
         private static readonly int isOnWallKey = Animator.StringToHash("isOnWall");
+        private static readonly int throwKey = Animator.StringToHash("throw");
 
         protected override void Awake()
         {
@@ -94,10 +95,12 @@ namespace Assets.Src.Creatures
             {
                 _allowDoubleJump = true;
             }
+
             if (!isJumpPressing && _isOnWall)
             {
                 return 0f;
             }
+
             return base.CalculateYVelocity();
         }
 
@@ -128,8 +131,8 @@ namespace Assets.Src.Creatures
         private void UpdateHeroWeapon()
         {
             _animator.runtimeAnimatorController = _session.Data.IsArmed
-            ? _armedAnimatorController
-            : _unarmedAnimatorController;
+                ? _armedAnimatorController
+                : _unarmedAnimatorController;
         }
 
         private void SpawnCoins()
@@ -158,7 +161,7 @@ namespace Assets.Src.Creatures
             _rigidbody.velocity = new Vector2(
                 _rigidbody.velocity.x,
                 _damageVelocity
-                );
+            );
             if (_coinsCounter.Count > 0)
             {
                 SpawnCoins();
@@ -175,6 +178,19 @@ namespace Assets.Src.Creatures
             if (!_session.Data.IsArmed) return;
 
             base.Attack();
+        }
+
+        public void Throw()
+        {
+            if (_session.Data.IsArmed)
+            {
+                _animator.SetTrigger(throwKey);
+            }
+        }
+
+        public void onDoThrow()
+        {
+            _particles.Spawn("throw");
         }
 
         public void ArmHero()
