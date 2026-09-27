@@ -25,6 +25,7 @@ namespace Assets.Src.Components
 
         public void ModifyHealth(int value)
         {
+            if (Health <= 0) return;
             Health += value;
             _onChange?.Invoke(Health);
 
@@ -45,7 +46,6 @@ namespace Assets.Src.Components
         [Serializable]
         public class HealthChangeEvent : UnityEvent<int>
         {
-
         }
     }
 }

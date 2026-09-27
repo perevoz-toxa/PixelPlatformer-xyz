@@ -8,21 +8,21 @@ namespace Assets.Src.Creatures
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(HealthComponent))]
-
     public class Creature : MonoBehaviour
     {
-        [Header("Parameters")]
-        [SerializeField] private float _speed;
+        [Header("Parameters")] [SerializeField]
+        private float _speed;
+
         [SerializeField] protected float _jumpSpeed;
 
-        [Header("Advanced")]
-        [SerializeField] protected LayerMask _groundLayer;
+        [Header("Advanced")] [SerializeField] protected LayerMask _groundLayer;
         [SerializeField] private LayerCheck _groundCheck;
         [SerializeField] private CheckCircleOverlap _attackRange;
         [SerializeField] private bool _invertScale;
 
-        [Header("Particles")]
-        [SerializeField] protected SpawnListComponent _particles;
+        [Header("Particles")] [SerializeField] protected SpawnListComponent _particles;
+
+        private HealthComponent _healthComponent;
         protected Rigidbody2D _rigidbody;
         protected Vector2 _direction;
         protected Animator _animator;
@@ -36,14 +36,14 @@ namespace Assets.Src.Creatures
         private static readonly int hitKey = Animator.StringToHash("hit");
         private static readonly int attackKey = Animator.StringToHash("attack");
 
-        private void UpdateSpriteDirection()
+        public void UpdateSpriteDirection(Vector2 direction)
         {
             var multiplier = _invertScale ? -1 : 1;
-            if (_direction.x > 0)
+            if (direction.x > 0)
             {
                 transform.localScale = new Vector3(multiplier, 1, 1);
             }
-            else if (_direction.x < 0)
+            else if (direction.x < 0)
             {
                 transform.localScale = new Vector3(-1 * multiplier, 1, 1);
             }
@@ -58,18 +58,18 @@ namespace Assets.Src.Creatures
             _rigidbody.velocity = new Vector2(xVelocity, yVelocity);
 
 
-
             _animator.SetBool(isGroundedKey, _isGrounded);
             _animator.SetFloat(verticalVelocityKey, _rigidbody.velocity.y);
             _animator.SetBool(isRunningKey, _direction.x != 0);
 
-            UpdateSpriteDirection();
+            UpdateSpriteDirection(_direction);
         }
 
         protected virtual void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _healthComponent = GetComponent<HealthComponent>();
         }
 
         protected virtual void Update()
@@ -114,6 +114,8 @@ namespace Assets.Src.Creatures
 
         public virtual void TakeDamage()
         {
+            if (_healthComponent.Health <= 0) return;
+            
             _isJumping = false;
             _animator.SetTrigger(hitKey);
         }

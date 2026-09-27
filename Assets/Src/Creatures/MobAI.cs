@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Src.Creatures
 {
-[RequireComponent(typeof(SpawnListComponent))]
+    [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(Creature))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Patrol))]
@@ -14,9 +14,9 @@ namespace Assets.Src.Creatures
         [SerializeField] private LayerCheck _vision;
         [SerializeField] private LayerCheck _canAttack;
 
-        [Space]
-        [Header("Parameters")]
-        [SerializeField] private float _alarmDelay = 0.5f;
+        [Space] [Header("Parameters")] [SerializeField]
+        private float _alarmDelay = 0.5f;
+
         [SerializeField] private float _attackCooldown = 1f;
         [SerializeField] private float _missCooldown = 0.5f;
 
@@ -61,6 +61,7 @@ namespace Assets.Src.Creatures
                 yield return null;
             }
 
+            _creature.SetDirection(Vector2.zero);
             _particles.Spawn("miss");
             yield return new WaitForSeconds(_missCooldown);
             StartState(_patrol.DoPatrol());
@@ -79,17 +80,31 @@ namespace Assets.Src.Creatures
 
         private void SetDirectionToTarget()
         {
+            var direction = GetDirectionToTarget();
+            _creature.SetDirection(direction);
+        }
+
+        private Vector2 GetDirectionToTarget()
+        {
             var direction = _target.transform.position - transform.position;
             direction.y = 0;
-            _creature.SetDirection(direction.normalized);
+            return direction.normalized;
         }
 
         private IEnumerator AgroToHero()
         {
+            LookAtHero();
             _particles.Spawn("exclamation");
             yield return new WaitForSeconds(_alarmDelay);
 
             StartState(GoToHero());
+        }
+
+        private void LookAtHero()
+        {
+            var direction = GetDirectionToTarget();
+            _creature.SetDirection(Vector2.zero);
+            _creature.UpdateSpriteDirection(direction);
         }
 
         private void StartState(IEnumerator coroutine)
@@ -100,6 +115,7 @@ namespace Assets.Src.Creatures
             {
                 StopCoroutine(_current);
             }
+
             _current = StartCoroutine(coroutine);
         }
 

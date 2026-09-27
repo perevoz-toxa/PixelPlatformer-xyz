@@ -70,11 +70,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -810659633
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d321805a2d8a8be4db2fd8fd1b49f93e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.625, y: 0.625}
@@ -99,13 +99,16 @@ MonoBehaviour:
   _clips:
   - _name: run
     _sprites:
-    - {fileID: 21300000, guid: d321805a2d8a8be4db2fd8fd1b49f93e, type: 3}
-    - {fileID: 21300000, guid: b200ea5893ca6744eab9ebb992ca9414, type: 3}
-    - {fileID: 21300000, guid: a7dc8bf7f41ad5945bfffceda7242293, type: 3}
-    - {fileID: 21300000, guid: efe1b5162bd81d44a9fcb7081f2268bc, type: 3}
-    - {fileID: 21300000, guid: baf9936cf476cf84f9daaa023e028dc8, type: 3}
+    - {fileID: 21300000, guid: 4138253291da9db488a0a5185ae739e1, type: 3}
+    - {fileID: 21300000, guid: 97dd411a43d6f9044806d0127fec1e4d, type: 3}
+    - {fileID: 21300000, guid: 14d8090abc0c19b49a5c19207db7b406, type: 3}
+    - {fileID: 21300000, guid: a29a55022a4b4894ba055b0e9b51f733, type: 3}
+    - {fileID: 21300000, guid: b7840aec3a6ff194f8cca710aaefa372, type: 3}
     _loop: 0
     _allowNext: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
   _currentClipName: run
   _onComplete:
     m_PersistentCalls:
