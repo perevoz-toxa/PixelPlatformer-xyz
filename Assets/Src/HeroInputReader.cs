@@ -38,24 +38,24 @@ namespace Assets.Src
 
         public void OnThrow(InputAction.CallbackContext context)
         {
-            if (context.started) 
+            if (context.started)
             {
                 _holdRoutine = StartCoroutine(HoldThrow());
             }
-            else if (context.canceled) 
+            else if (context.canceled)
             {
-                if (_holdRoutine == null) return; 
+                if (_holdRoutine == null) return;
                 StopCoroutine(_holdRoutine);
                 _holdRoutine = null;
-                _hero.Throw(); 
+                _hero.Throw();
             }
         }
 
         private IEnumerator HoldThrow()
         {
             yield return new WaitForSeconds(_holdThreshold);
-            _holdRoutine = null; 
-            _hero.ThrowSeries(); 
+            _holdRoutine = null;
+            _hero.ThrowSeries();
         }
     }
-}
+}
