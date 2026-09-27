@@ -21,6 +21,7 @@ namespace Assets.Src.Creatures
 
         [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _damageVelocity;
+        [SerializeField] private Cooldown _throwCooldown;
 
         [Header("Hero Advanced")] [SerializeField]
         private LayerCheck _wallCheck;
@@ -182,10 +183,11 @@ namespace Assets.Src.Creatures
 
         public void Throw()
         {
-            if (_session.Data.IsArmed)
-            {
-                _animator.SetTrigger(throwKey);
-            }
+            if (!_session.Data.IsArmed ||
+                !_throwCooldown.IsReady) return;
+            
+            _animator.SetTrigger(throwKey);
+            _throwCooldown.Reset();
         }
 
         public void onDoThrow()
