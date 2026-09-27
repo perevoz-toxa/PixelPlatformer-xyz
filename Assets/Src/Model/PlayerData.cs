@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Src.Model
 {
@@ -7,7 +8,19 @@ namespace Assets.Src.Model
     {
         public int Coins;
         public int Hp;
-        public bool IsArmed;
+        private int _heroSwords;
+
+        public bool IsArmed => HeroSwords > 0;
+
+        public int HeroSwords
+        {
+            get => _heroSwords;
+            set
+            {
+                _heroSwords = value;
+                Debug.Log($"Setting HeroSwords: {value}");
+            }
+        }
 
         public PlayerData Clone()
         {
@@ -15,8 +28,8 @@ namespace Assets.Src.Model
             {
                 Coins = Coins,
                 Hp = Hp,
-                IsArmed = IsArmed
+                HeroSwords = HeroSwords
             };
         }
     }
-}
+}

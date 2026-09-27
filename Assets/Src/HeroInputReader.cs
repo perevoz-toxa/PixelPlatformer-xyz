@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Assets.Src.Creatures;
 
@@ -9,6 +10,9 @@ namespace Assets.Src
     public class HeroInputReader : MonoBehaviour
     {
         [SerializeField] private Hero _hero;
+        [SerializeField] private float _holdThreshold = 1f;
+
+        private Coroutine _holdRoutine;
 
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -34,10 +38,24 @@ namespace Assets.Src
 
         public void OnThrow(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.started) 
             {
-                _hero.Throw();
+                _holdRoutine = StartCoroutine(HoldThrow());
+            }
+            else if (context.canceled) 
+            {
+                if (_holdRoutine == null) return; 
+                StopCoroutine(_holdRoutine);
+                _holdRoutine = null;
+                _hero.Throw(); 
             }
         }
+
+        private IEnumerator HoldThrow()
+        {
+            yield return new WaitForSeconds(_holdThreshold);
+            _holdRoutine = null; 
+            _hero.ThrowSeries(); 
+        }
     }
-}
+}

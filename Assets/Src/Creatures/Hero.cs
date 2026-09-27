@@ -21,6 +21,7 @@ namespace Assets.Src.Creatures
 
         [SerializeField] private float _slamDownVelocity;
         [SerializeField] private float _damageVelocity;
+        [SerializeField] private float _throwSeriesInterval = 0.2f;
         [SerializeField] private Cooldown _throwCooldown;
 
         [Header("Hero Advanced")] [SerializeField]
@@ -183,21 +184,47 @@ namespace Assets.Src.Creatures
 
         public void Throw()
         {
-            if (!_session.Data.IsArmed ||
+            if (_session.Data.HeroSwords <= 1 ||
                 !_throwCooldown.IsReady) return;
-            
+
             _animator.SetTrigger(throwKey);
             _throwCooldown.Reset();
         }
 
-        public void onDoThrow()
+        [ContextMenu("Throw Series")]
+        public void ThrowSeries()
         {
+            if (_session.Data.HeroSwords <= 1 ||
+                !_throwCooldown.IsReady) return;
+
+            StartCoroutine(ThrowSeriesCoroutine());
+        }
+
+        private IEnumerator ThrowSeriesCoroutine()
+        {
+            var swordsCount = CalculateSwordsForThrowSeries();
+            for (var i = swordsCount; i > 0; i--)
+            {
+                _animator.SetTrigger(throwKey);
+                _throwCooldown.Reset();
+                yield return new WaitForSeconds(_throwSeriesInterval);
+            }
+        }
+
+        private int CalculateSwordsForThrowSeries()
+        {
+            return Mathf.Min(_session.Data.HeroSwords - 1, 3);
+        }
+
+        public void OnDoThrow()
+        {
+            _session.Data.HeroSwords = Mathf.Max(1, _session.Data.HeroSwords - 1);
             _particles.Spawn("throw");
         }
 
         public void ArmHero()
         {
-            _session.Data.IsArmed = true;
+            _session.Data.HeroSwords++;
             UpdateHeroWeapon();
         }
 
