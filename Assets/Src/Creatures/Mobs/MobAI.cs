@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections;
-using Assets.Src.Components;
+﻿using System.Collections;
+using Components.ColliderBased;
+using Components.GoBased;
+using Creatures.Mobs.Patrolling;
 using UnityEngine;
 
-namespace Assets.Src.Creatures
+namespace Creatures.Mobs
 {
     [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(Creature))]
@@ -22,7 +23,7 @@ namespace Assets.Src.Creatures
 
         private bool _isDead;
 
-        private Coroutine _current;
+        private IEnumerator _current;
         private GameObject _target;
 
         private Creature _creature;
@@ -51,6 +52,7 @@ namespace Assets.Src.Creatures
             {
                 if (_canAttack.IsTouchingLayer)
                 {
+                    yield return null;
                     StartState(Attack());
                 }
                 else
@@ -116,7 +118,8 @@ namespace Assets.Src.Creatures
                 StopCoroutine(_current);
             }
 
-            _current = StartCoroutine(coroutine);
+            _current = coroutine;
+            StartCoroutine(coroutine);
         }
 
         public void OnHeroInVision(GameObject go)

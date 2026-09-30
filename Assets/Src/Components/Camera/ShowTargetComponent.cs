@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Components.Interactions;
+using UnityEngine;
 
 namespace Assets.Src.Components
 {

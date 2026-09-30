@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
-using Assets.Src.Components;
 using System;
-using Assets.Src.Utils;
-using Assets.Src.Model;
 using System.Collections;
-using UnityEditor.Animations;
+using Components.Collectables;
+using Components.ColliderBased;
+using Components.GoBased;
+using Components.Health;
+using Model;
+using Utils;
 
-namespace Assets.Src.Creatures
+namespace Creatures.Hero
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
@@ -27,8 +29,8 @@ namespace Assets.Src.Creatures
         [Header("Hero Advanced")] [SerializeField]
         private LayerCheck _wallCheck;
 
-        [SerializeField] private AnimatorController _armedAnimatorController;
-        [SerializeField] private AnimatorController _unarmedAnimatorController;
+        [SerializeField] private RuntimeAnimatorController _armedAnimatorController;
+        [SerializeField] private RuntimeAnimatorController _unarmedAnimatorController;
         [SerializeField] private CheckCircleOverlap _interactionCheck;
 
         [Header("Hero Particles")] [SerializeField]

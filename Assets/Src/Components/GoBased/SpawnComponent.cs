@@ -10,5 +10,6 @@ public class SpawnComponent : MonoBehaviour
     {
         var instance = Instantiate(_prefab, _target.position, Quaternion.identity);
         instance.transform.localScale = _target.lossyScale;
+        instance.SetActive(true);
     }
 }

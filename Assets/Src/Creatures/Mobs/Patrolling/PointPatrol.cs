@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
+using Assets.Src.Creatures;
 using UnityEngine;
 
-namespace Assets.Src.Creatures
+namespace Creatures.Mobs.Patrolling
 {
     public class PointPatrol : Patrol
     {

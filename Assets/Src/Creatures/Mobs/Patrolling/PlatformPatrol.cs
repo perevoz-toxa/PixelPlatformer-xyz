@@ -1,7 +1,9 @@
 using System.Collections;
+using Creatures;
+using Components.ColliderBased;
 using UnityEngine;
 
-namespace Assets.Src.Creatures
+namespace Creatures.Mobs.Patrolling
 {
     public class PlatformPatrol : Patrol
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Src.Utils
+namespace Utils
 {
     public class HandlesUtils : MonoBehaviour
     {

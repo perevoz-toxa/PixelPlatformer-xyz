@@ -8,6 +8,14 @@ namespace Assets.Src.Components
     {
         [SerializeField] private SpawnData[] _spawners;
 
+        public void SpawnAll()
+        {
+            foreach (var spawner in _spawners)
+            {
+                spawner.Component.Spawn();
+            }
+        }
+
         public void Spawn(string id)
         {
             var spawner = _spawners.FirstOrDefault(element => element.Id == id);

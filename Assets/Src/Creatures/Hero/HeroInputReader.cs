@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using Assets.Src.Creatures;
 
 
-namespace Assets.Src
+namespace Creatures.Hero
 {
     [RequireComponent(typeof(Hero))]
     public class HeroInputReader : MonoBehaviour

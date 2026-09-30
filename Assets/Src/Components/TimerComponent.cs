@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Src.Components
+namespace Components
 {
     public class TimerComponent : MonoBehaviour
     {

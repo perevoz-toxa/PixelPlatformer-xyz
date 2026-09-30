@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Src.Model
+namespace Model
 {
     [Serializable]
     public class PlayerData
@@ -32,4 +32,4 @@ namespace Assets.Src.Model
             };
         }
     }
-}
+}

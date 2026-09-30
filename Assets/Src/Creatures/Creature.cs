@@ -1,7 +1,9 @@
-﻿using Assets.Src.Components;
+﻿using Components.ColliderBased;
+using Components.GoBased;
+using Components.Health;
 using UnityEngine;
 
-namespace Assets.Src.Creatures
+namespace Creatures
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]

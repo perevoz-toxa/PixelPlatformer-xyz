@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Src.Model
+namespace Model
 {
     public class GameSession : MonoBehaviour
     {

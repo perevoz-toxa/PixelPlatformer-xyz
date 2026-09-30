@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Assets.Src
+namespace Utils
 {
     [Serializable]
     public class CheatItem

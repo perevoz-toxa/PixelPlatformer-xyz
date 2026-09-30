@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Src.Creatures
+namespace Creatures.Mobs.Patrolling
 {
     public abstract class Patrol : MonoBehaviour
     {

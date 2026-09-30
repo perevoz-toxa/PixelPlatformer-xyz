@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-namespace Assets.Src
+namespace Components.Interactions
 {
     public class CameraStateController : MonoBehaviour
     {
