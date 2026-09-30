@@ -1,8 +1,8 @@
-﻿using Assets.Src.Model;
+﻿using Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Src.Components
+namespace Components.LevelManagement
 {
     public class ReloadLevelComponent : MonoBehaviour
     {

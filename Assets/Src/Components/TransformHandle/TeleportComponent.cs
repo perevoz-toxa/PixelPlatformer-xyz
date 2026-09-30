@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Src.Components
+namespace Components.TransformHandle
 {
     public class TeleportComponent : MonoBehaviour
     {

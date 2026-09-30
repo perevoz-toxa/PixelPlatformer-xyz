@@ -1,9 +1,9 @@
 ﻿using System;
-using Assets.Src.Utils;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
-namespace Assets.Src.Components
+namespace Components.ColliderBased
 {
     [RequireComponent(typeof(Collider2D))]
     public class EnterTriggerComponent : MonoBehaviour

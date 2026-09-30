@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.Health
 {
     public class HealthEffectComponent : MonoBehaviour
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 
-namespace Assets.Src.Components
+namespace Components.Animation
 {
     [RequireComponent(typeof(SpriteRenderer))]
 

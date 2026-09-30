@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.TransformHandle
 {
     public class TwoPointMoverComponent : MonoBehaviour
     {

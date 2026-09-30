@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 
-public class SpawnComponent : MonoBehaviour
-{
-    [SerializeField] private Transform _target;
-    [SerializeField] private GameObject _prefab;
 
-    [ContextMenu("Spawn")]
-    public void Spawn()
+namespace Components.GoBased
+{
+    public class SpawnComponent : MonoBehaviour
     {
-        var instance = Instantiate(_prefab, _target.position, Quaternion.identity);
-        instance.transform.localScale = _target.lossyScale;
-        instance.SetActive(true);
+        [SerializeField] private Transform _target;
+        [SerializeField] private GameObject _prefab;
+
+        [ContextMenu("Spawn")]
+        public void Spawn()
+        {
+            var instance = Instantiate(_prefab, _target.position, Quaternion.identity);
+            instance.transform.localScale = _target.lossyScale;
+            instance.SetActive(true);
+        }
     }
 }

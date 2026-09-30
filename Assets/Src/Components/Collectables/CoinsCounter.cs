@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Src
+namespace Components.Collectables
 {
     public class CoinsCounter : MonoBehaviour
     {

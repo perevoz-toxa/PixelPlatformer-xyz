@@ -1,6 +1,7 @@
+using Assets.Src;
 using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.Collectables
 {
     public class CollectComponent : MonoBehaviour
     {

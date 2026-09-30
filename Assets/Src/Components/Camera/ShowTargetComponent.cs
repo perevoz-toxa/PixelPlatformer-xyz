@@ -1,7 +1,7 @@
 ﻿using Components.Interactions;
 using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.Camera
 {
     public class ShowTargetComponent : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.GoBased
 {
     public class SpawnListComponent : MonoBehaviour
     {

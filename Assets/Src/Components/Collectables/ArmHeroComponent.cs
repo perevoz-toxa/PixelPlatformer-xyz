@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using Assets.Src.Creatures;
+﻿using Creatures.Hero;
+using UnityEngine;
 
-namespace Assets.Src.Components
+namespace Components.Collectables
 {
     public class ArmHeroComponent : MonoBehaviour
     {

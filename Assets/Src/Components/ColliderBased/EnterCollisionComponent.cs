@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Src.Components
+namespace Components.ColliderBased
 {
     public class EnterCollisionComponent : MonoBehaviour
     {

@@ -3,8 +3,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
-namespace Assets.Src
+namespace Components.ColliderBased
 {
     public class CheckCircleOverlap : MonoBehaviour
     {
@@ -37,7 +38,7 @@ namespace Assets.Src
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            Handles.color = Utils.HandlesUtils.TransparentGreen;
+            Handles.color = HandlesUtils.TransparentGreen;
             Handles.DrawSolidDisc(transform.position, Vector3.forward, _radius);
         }
 #endif
