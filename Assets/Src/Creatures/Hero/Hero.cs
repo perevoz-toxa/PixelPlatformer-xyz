@@ -73,7 +73,9 @@ namespace Creatures.Hero
         protected override void Update()
         {
             base.Update();
-            if (_wallCheck.IsTouchingLayer && _direction.x == transform.localScale.x)
+
+            var moveToSameDirection = _direction.x * transform.localScale.x > 0;
+            if (_wallCheck.IsTouchingLayer && moveToSameDirection)
             {
                 _isOnWall = true;
                 _rigidbody.gravityScale = 0;
@@ -110,7 +112,7 @@ namespace Creatures.Hero
 
         protected override float CalculateJumpVelocity(float yVelocity)
         {
-            if (_allowDoubleJump && !_isGrounded)
+            if (_allowDoubleJump && !_isGrounded && !_isOnWall)
             {
                 _particles.Spawn("jump");
                 _allowDoubleJump = false;

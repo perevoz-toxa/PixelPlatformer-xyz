@@ -208,7 +208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -810659633
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a0fc9e2397233414f8d1f4e6ceff8fb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hero: {fileID: 554974807485988110}
+  _holdThreshold: 1
 --- !u!114 &554974807485988110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +259,9 @@ MonoBehaviour:
   _interactionRadius: 1
   _slamDownVelocity: 15
   _damageVelocity: 15
+  _throwSeriesInterval: 0.2
+  _throwCooldown:
+    _value: 1
   _wallCheck: {fileID: 8561416108041535713}
   _armedAnimatorController: {fileID: 9100000, guid: 93a402d4ce2662740bdf1a77f91497c7,
     type: 2}
@@ -418,7 +422,7 @@ Animator:
   m_GameObject: {fileID: 554974807485988096}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 93a402d4ce2662740bdf1a77f91497c7, type: 2}
+  m_Controller: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5366,7 +5370,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1549618455
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_RenderMode: 0
   m_SortMode: 0

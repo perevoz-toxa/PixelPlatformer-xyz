@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1001 &33965367
@@ -201,16 +206,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hero
-      objectReference: {fileID: 0}
-    - target: {fileID: 554974807485988097, guid: 659e336ace2d716488be2fef9ace44fa,
-        type: 3}
-      propertyPath: _onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 554974807485988110, guid: 659e336ace2d716488be2fef9ace44fa,
-        type: 3}
-      propertyPath: _throwCooldown._value
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 554974807492704260, guid: 659e336ace2d716488be2fef9ace44fa,
         type: 3}
@@ -1168,6 +1163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!4 &245360404 stripped
@@ -1272,6 +1272,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -2079,6 +2084,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1001 &571275219
@@ -2148,6 +2158,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1001 &599579342
@@ -2216,6 +2231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -2321,6 +2341,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -2509,6 +2534,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!4 &790463352 stripped
@@ -2659,6 +2689,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1001 &930762099
@@ -2728,6 +2763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1001 &935702053
@@ -2796,6 +2836,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -3040,6 +3085,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -4412,6 +4462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
 --- !u!1 &1554667355
@@ -4479,7 +4534,7 @@ PrefabInstance:
     - target: {fileID: 554974807485988096, guid: 36d06007846cb9b45bd2142121eaf890,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 554974807485988097, guid: 36d06007846cb9b45bd2142121eaf890,
         type: 3}
@@ -4626,6 +4681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -4840,6 +4900,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
@@ -5102,6 +5167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sword (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764695709743308087, guid: 0b4c6dca094ac634a9d8a646751e6fc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b4c6dca094ac634a9d8a646751e6fc0, type: 3}
