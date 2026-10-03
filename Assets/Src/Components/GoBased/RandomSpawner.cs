@@ -27,6 +27,12 @@ namespace Components.GoBased
             TryStopRoutine();
 
             if (!enabled) return;
+
+            if (!gameObject.activeInHierarchy)
+            {
+                gameObject.SetActive(true);
+            }
+
             _routine = StartCoroutine(StartSpawn(items));
         }
 
