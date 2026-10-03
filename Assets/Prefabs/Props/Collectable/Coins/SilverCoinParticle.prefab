@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2116471076}
   - component: {fileID: -3688310439822447550}
   - component: {fileID: 7769152477324662158}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SilverCoinParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

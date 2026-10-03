@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 296683656963186764}
   - component: {fileID: 296683656963186765}
   - component: {fileID: 711311371}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: GoldCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 116793705
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 6582046967323461550, guid: 2860d41fc3a38ef4ebe691cde87e43d1,
     type: 3}
@@ -116,6 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: Player
+  _layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   _action:
     m_PersistentCalls:
       m_Calls:
@@ -165,6 +168,9 @@ MonoBehaviour:
     - {fileID: 3444832735345940322, guid: 2860d41fc3a38ef4ebe691cde87e43d1, type: 3}
     _loop: 1
     _allowNext: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
   - _name: fadeOut
     _sprites:
     - {fileID: -4986890610287934012, guid: 2860d41fc3a38ef4ebe691cde87e43d1, type: 3}
@@ -173,6 +179,9 @@ MonoBehaviour:
     - {fileID: -6288512792030432889, guid: 2860d41fc3a38ef4ebe691cde87e43d1, type: 3}
     _loop: 0
     _allowNext: 0
+    _onComplete:
+      m_PersistentCalls:
+        m_Calls: []
   _currentClipName: idle
   _onComplete:
     m_PersistentCalls:
