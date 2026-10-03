@@ -11,7 +11,7 @@ namespace Components.Health
             if (target != null)
             {
                 var healthComponent = target.GetComponent<HealthComponent>();
-                if (target != null)
+                if (healthComponent != null)
                 {
                     healthComponent.ModifyHealth(_effectValue);
                 }
