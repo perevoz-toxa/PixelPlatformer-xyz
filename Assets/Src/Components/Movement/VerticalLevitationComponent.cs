@@ -2,29 +2,14 @@
 
 namespace Components.Movement
 {
-    public class VerticalLevitationComponent : MonoBehaviour
+    public class VerticalLevitationComponent : LevitationComponent
     {
-        [SerializeField] private float _frequency = 1f;
-        [SerializeField] private float _amplitude = 1f;
-        [SerializeField] private bool _randomize = true;
-        
-        private float _originalY;
-        private Rigidbody2D _rigidbody;
-        private float _seed;
-
-        private void Awake()
+        protected override Vector2 CalculateOffset()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _originalY = _rigidbody.position.y;
-            if (_randomize)
-                _seed = Random.value * Mathf.PI * 2;
-        }
-
-        private void Update()
-        {
-            var position = _rigidbody.position;
-            position.y = _originalY + Mathf.Sin(_seed + Time.time * _frequency) * _amplitude;
-            _rigidbody.MovePosition(position);
+            return new Vector2(
+                0,
+                Mathf.Sin(PhaseOffset + Time.time * Frequency) * Amplitude
+            );
         }
     }
 }
