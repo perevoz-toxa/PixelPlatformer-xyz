@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Assets.Src.Creatures;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Creatures.Mobs.Patrolling

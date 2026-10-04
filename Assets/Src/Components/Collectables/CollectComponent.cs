@@ -1,4 +1,3 @@
-using Assets.Src;
 using UnityEngine;
 
 namespace Components.Collectables
