@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1537293520904213982}
   - component: {fileID: 1537293520904213980}
   - component: {fileID: 1537293520904213987}
-  - component: {fileID: 2116471076}
   - component: {fileID: -3688310439822447550}
   - component: {fileID: 7769152477324662158}
+  - component: {fileID: 3206828760194058549}
   m_Layer: 16
   m_Name: SilverCoinParticle
   m_TagString: Untagged
@@ -168,7 +168,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2116471076}
+      - m_Target: {fileID: 0}
         m_MethodName: Collect
         m_Mode: 1
         m_Arguments:
@@ -190,19 +190,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2116471076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537293520904213986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47560d7db0d889c499d6e2f499f3938c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _value: 1
 --- !u!50 &-3688310439822447550
 Rigidbody2D:
   serializedVersion: 4
@@ -240,7 +227,7 @@ MonoBehaviour:
   _action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2116471076}
+      - m_Target: {fileID: 3206828760194058549}
         m_MethodName: Collect
         m_Mode: 1
         m_Arguments:
@@ -262,3 +249,17 @@ MonoBehaviour:
           m_StringArgument: fadeOut
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3206828760194058549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537293520904213986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47560d7db0d889c499d6e2f499f3938c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Coin
+  value: 1

@@ -911,7 +911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    Coins: 0
+    inventory:
+      inventory: []
     Hp: 100
 --- !u!1 &365421728
 GameObject:
@@ -1270,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.560299, y: -8.010542, z: -2.3032775}
+  m_LocalPosition: {x: -18.64657, y: -8.022333, z: -2.3032775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1094151363}
@@ -8600,6 +8601,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1890047107}
     m_Modifications:
+    - target: {fileID: 2913205728085760770, guid: 423c2237eb9a0cc4695f09fc890f45f5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3199999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034229656797857940, guid: 423c2237eb9a0cc4695f09fc890f45f5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811525672856072663, guid: 423c2237eb9a0cc4695f09fc890f45f5,
+        type: 3}
+      propertyPath: spriteHeight
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 7317679766611428365, guid: 423c2237eb9a0cc4695f09fc890f45f5,
         type: 3}
       propertyPath: m_RootOrder
@@ -8659,6 +8675,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TotemGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518992677647349685, guid: 423c2237eb9a0cc4695f09fc890f45f5,
+        type: 3}
+      propertyPath: cooldown._value
+      value: 0.67
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 423c2237eb9a0cc4695f09fc890f45f5, type: 3}

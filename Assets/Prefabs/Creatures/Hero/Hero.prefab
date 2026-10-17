@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 554974807485988108}
   - component: {fileID: 554974807485988099}
   - component: {fileID: 554974807485988098}
-  - component: {fileID: 3093224346806143519}
   - component: {fileID: 554974807485988097}
   - component: {fileID: 1626899319}
   m_Layer: 15
@@ -422,7 +421,7 @@ Animator:
   m_GameObject: {fileID: 554974807485988096}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90, type: 2}
+  m_Controller: {fileID: 9100000, guid: 93a402d4ce2662740bdf1a77f91497c7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -431,32 +430,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3093224346806143519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554974807485988096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d6203bf8237494c9584850751eac70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onChange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 554974807485988110}
-        m_MethodName: OnCoinsChange
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &554974807485988097
 MonoBehaviour:
   m_ObjectHideFlags: 0

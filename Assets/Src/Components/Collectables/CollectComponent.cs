@@ -1,17 +1,20 @@
+using Creatures.Hero;
+using Model.Definitions;
 using UnityEngine;
 
 namespace Components.Collectables
 {
     public class CollectComponent : MonoBehaviour
     {
-        [SerializeField] private int _value;
+        [InventoryId][SerializeField] private string itemName;
+        [SerializeField] private int value;
 
         public void Collect()
         {
-            var counter = FindObjectOfType<CoinsCounter>();
-            if (counter != null)
+            var hero = FindObjectOfType<Hero>();
+            if (hero != null)
             {
-                counter.Add(_value);
+                hero.AddInInventory(itemName, value);
             }
         }
     }

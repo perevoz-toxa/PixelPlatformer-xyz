@@ -1,0 +1,25 @@
+﻿using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+namespace Model.Definitions.Editor
+{
+    [CustomPropertyDrawer(typeof(InventoryIdAttribute))]
+    public class InventoryIdAttributeDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var defs = DefsFacade.Instance.Items.itemsForEditor;
+            var ids = new List<string>();
+            foreach (var itemDef in defs)  
+            {
+                ids.Add(itemDef.id);
+            }
+            
+            var index = ids.IndexOf(property.stringValue);
+            if (index < 0) index = 0;
+            index = EditorGUI.Popup(position, property.displayName, index, ids.ToArray());
+            property.stringValue = ids[index];
+        }
+    }
+}

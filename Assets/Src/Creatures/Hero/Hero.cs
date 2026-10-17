@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-using Components.Collectables;
 using Components.ColliderBased;
 using Components.GoBased;
 using Components.Health;
@@ -13,7 +12,6 @@ namespace Creatures.Hero
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(CoinsCounter))]
     [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(HealthComponent))]
     public class Hero : Creature
@@ -36,7 +34,6 @@ namespace Creatures.Hero
         [Header("Hero Particles")] [SerializeField]
         private ParticleSystem _coinsParticleSystem;
 
-        private CoinsCounter _coinsCounter;
         private bool _allowDoubleJump;
         private bool _isOnWall;
         private GameSession _session;
@@ -45,10 +42,12 @@ namespace Creatures.Hero
         private static readonly int isOnWallKey = Animator.StringToHash("isOnWall");
         private static readonly int throwKey = Animator.StringToHash("throw");
 
+        private int CoinCount => _session.Data.Inventory.Count("Coin");
+        private int SwordCount => _session.Data.Inventory.Count("Sword");
+
         protected override void Awake()
         {
             base.Awake();
-            _coinsCounter = GetComponent<CoinsCounter>();
             _defaultGravityScale = _rigidbody.gravityScale;
         }
 
@@ -56,18 +55,26 @@ namespace Creatures.Hero
         {
             _session = FindObjectOfType<GameSession>();
             UpdateHeroWeapon();
+            var inventory = _session.Data.Inventory;
+            inventory.OnChanged += OnInventoryChanged;
 
             var healthComponent = GetComponent<HealthComponent>();
             if (healthComponent != null)
             {
                 healthComponent.Health = _session.Data.Hp;
             }
+        }
 
-            var coinsCounter = GetComponent<CoinsCounter>();
-            if (coinsCounter != null)
-            {
-                coinsCounter.Count = _session.Data.Coins;
-            }
+        private void OnDestroy()
+        {
+            var inventory = _session.Data.Inventory;
+            inventory.OnChanged -= OnInventoryChanged;
+        }
+
+        private void OnInventoryChanged(string id, int value)
+        {
+            if (id == "Sword")
+                UpdateHeroWeapon();
         }
 
         protected override void Update()
@@ -136,15 +143,17 @@ namespace Creatures.Hero
 
         private void UpdateHeroWeapon()
         {
-            _animator.runtimeAnimatorController = _session.Data.IsArmed
+            _animator.runtimeAnimatorController = IsArmed()
                 ? _armedAnimatorController
                 : _unarmedAnimatorController;
         }
 
         private void SpawnCoins()
         {
-            var numCoinsToDispose = Math.Min(_coinsCounter.Count, 5);
-            _coinsCounter.Count -= numCoinsToDispose;
+            var inventory = _session.Data.Inventory;
+            var numCoinsToDispose = Math.Min(CoinCount, 5);
+
+            inventory.Remove("Coin", numCoinsToDispose);
 
             var burst = _coinsParticleSystem.emission.GetBurst(0);
             burst.count = numCoinsToDispose;
@@ -161,17 +170,17 @@ namespace Creatures.Hero
             _coinsParticleSystem.gameObject.SetActive(false);
         }
 
+        private bool IsArmed()
+        {
+            return SwordCount > 0;
+        }
+
         public override void TakeDamage()
         {
             base.TakeDamage();
-            _rigidbody.velocity = new Vector2(
-                _rigidbody.velocity.x,
-                _damageVelocity
-            );
-            if (_coinsCounter.Count > 0)
-            {
+
+            if (CoinCount > 0)
                 SpawnCoins();
-            }
         }
 
         public void Interact()
@@ -179,17 +188,24 @@ namespace Creatures.Hero
             _interactionCheck.Check();
         }
 
+        public void AddInInventory(string id, int value)
+        {
+            Debug.Log($"Added to inventory {id}: {value}");
+
+            var inventory = _session.Data.Inventory;
+            inventory.Add(id, value);
+        }
+
         public override void Attack()
         {
-            if (!_session.Data.IsArmed) return;
+            if (!IsArmed()) return;
 
             base.Attack();
         }
 
         public void Throw()
         {
-            if (_session.Data.HeroSwords <= 1 ||
-                !_throwCooldown.IsReady) return;
+            if (SwordCount <= 1 || !_throwCooldown.IsReady) return;
 
             _animator.SetTrigger(throwKey);
             _throwCooldown.Reset();
@@ -198,8 +214,10 @@ namespace Creatures.Hero
         [ContextMenu("Throw Series")]
         public void ThrowSeries()
         {
-            if (_session.Data.HeroSwords <= 1 ||
-                !_throwCooldown.IsReady) return;
+            var inventory = _session.Data.Inventory;
+            var swordsCount = inventory.Count("Sword");
+
+            if (swordsCount <= 1 || !_throwCooldown.IsReady) return;
 
             StartCoroutine(ThrowSeriesCoroutine());
         }
@@ -217,29 +235,23 @@ namespace Creatures.Hero
 
         private int CalculateSwordsForThrowSeries()
         {
-            return Mathf.Min(_session.Data.HeroSwords - 1, 3);
+            var inventory = _session.Data.Inventory;
+            var swordsCount = inventory.Count("Sword");
+
+            return Mathf.Min(swordsCount - 1, 3);
         }
 
         public void OnDoThrow()
         {
-            _session.Data.HeroSwords = Mathf.Max(1, _session.Data.HeroSwords - 1);
-            _particles.Spawn("throw");
-        }
+            var inventory = _session.Data.Inventory;
 
-        public void ArmHero()
-        {
-            _session.Data.HeroSwords++;
-            UpdateHeroWeapon();
+            inventory.Remove("Sword", 1);
+            _particles.Spawn("throw");
         }
 
         public void OnHealthChange(int hp)
         {
             _session.Data.Hp = hp;
-        }
-
-        public void OnCoinsChange(int count)
-        {
-            _session.Data.Coins = count;
         }
     }
 }

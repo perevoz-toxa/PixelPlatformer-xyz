@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6288279767665979147}
   - component: {fileID: 6275581793945064335}
   - component: {fileID: 411375366416885905}
-  - component: {fileID: 7059866449674341416}
   - component: {fileID: 4274567991620755766}
+  - component: {fileID: 3156139426893398919}
   m_Layer: 0
   m_Name: StackedSword
   m_TagString: Untagged
@@ -166,18 +166,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3125
---- !u!114 &7059866449674341416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035865553358901862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 965a21b2a8872ea4b942aabec4e79e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4274567991620755766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,9 +185,9 @@ MonoBehaviour:
   _action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7059866449674341416}
-        m_MethodName: ArmHero
-        m_Mode: 0
+      - m_Target: {fileID: 3156139426893398919}
+        m_MethodName: Collect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -219,3 +207,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3156139426893398919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035865553358901862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47560d7db0d889c499d6e2f499f3938c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Sword
+  value: 1

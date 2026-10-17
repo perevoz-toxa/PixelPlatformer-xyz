@@ -39,6 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1763795297888063914, guid: 88cc4cba9ad4dd048bf5ecb81e5b9301,
         type: 3}
+      propertyPath: spriteHeight
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763795297888063914, guid: 88cc4cba9ad4dd048bf5ecb81e5b9301,
+        type: 3}
       propertyPath: animatorController
       value: 
       objectReference: {fileID: 9100000, guid: bc23f889441b0fc4e8c824fc9b42f689, type: 2}
@@ -166,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 8594702698609961515, guid: 88cc4cba9ad4dd048bf5ecb81e5b9301,
         type: 3}
       propertyPath: m_Name
-      value: RedHairTotem
+      value: RedHairTotem Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88cc4cba9ad4dd048bf5ecb81e5b9301, type: 3}
