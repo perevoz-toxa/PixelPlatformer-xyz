@@ -167,6 +167,7 @@ Transform:
   - {fileID: 4020494644401249103}
   - {fileID: 739049826712001055}
   - {fileID: 4181772550986796310}
+  - {fileID: 6287386973902980295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -267,6 +268,7 @@ MonoBehaviour:
   _unarmedAnimatorController: {fileID: 9100000, guid: ff0677041b44e174dac84f633b9c7d90,
     type: 2}
   _interactionCheck: {fileID: 7132208233366366177}
+  _healthPotions: {fileID: 2170388054144150079}
   _coinsParticleSystem: {fileID: 554974808208548069}
 --- !u!114 &554974807485988109
 MonoBehaviour:
@@ -310,18 +312,7 @@ MonoBehaviour:
     m_ActionId: fc5574da-ea47-48c0-98f9-86d0ca1b9ca9
     m_ActionName: Hero/HorizontalMovement[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 554974807485988111}
-        m_MethodName: OnSaySomething
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 33a9c74d-0b04-46d5-b104-1148d9ca049b
     m_ActionName: Hero/SaySomething[/Mouse/leftButton,/Keyboard/space]
   - m_PersistentCalls:
@@ -369,6 +360,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ac115bc6-1dcf-41d9-8f8d-8d86a9b4aeee
     m_ActionName: Hero/Throw[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 554974807485988111}
+        m_MethodName: OnDrinkHealthPotion
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cb965753-bb34-4e50-ba1e-f48757f0e93d
+    m_ActionName: Hero/DrinkHealthPotion[/Keyboard/h]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
@@ -5708,3 +5714,81 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _isTouchingLayer: 0
+--- !u!1 &6600516575111149069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6287386973902980295}
+  - component: {fileID: 2170388054144150079}
+  - component: {fileID: 9067469475504270835}
+  m_Layer: 15
+  m_Name: HealthPotions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6287386973902980295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600516575111149069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 554974807492704260}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2170388054144150079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600516575111149069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242c8b65862042f38b73fd42cd147b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredItems:
+  - id: HealthPotion
+    value: 1
+  removeAfterUse: 1
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9067469475504270835}
+        m_MethodName: ApplyEffectToTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 554974807485988096}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFailure:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &9067469475504270835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600516575111149069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbec2078eb47ee44973d53b62fe6c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectValue: 50

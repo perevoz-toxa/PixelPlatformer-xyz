@@ -50,6 +50,14 @@ namespace Creatures.Hero
             }
         }
 
+        public void OnDrinkHealthPotion(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                _hero.DrinkHealthPotion();
+            }
+        }
+
         private IEnumerator HoldThrow()
         {
             yield return new WaitForSeconds(_holdThreshold);

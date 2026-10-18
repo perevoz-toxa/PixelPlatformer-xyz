@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 190947723042857373}
   - component: {fileID: 1834062776425584014}
   - component: {fileID: 1506218627156399166}
-  - component: {fileID: 4286228023673983877}
   - component: {fileID: 5561173949139741816}
   - component: {fileID: 7622736647530087313}
+  - component: {fileID: 4072612867438334031}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: Untagged
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 116793705
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 3714227102187029162, guid: af8fb0aec4072994b8bfa16b3d9b3d90,
     type: 3}
@@ -125,22 +125,22 @@ MonoBehaviour:
     _allowNext: 0
     _onComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1506218627156399166}
+          m_MethodName: DestroyObject
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _currentClipName: idle
   _onComplete:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1506218627156399166}
-        m_MethodName: DestroyObject
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1506218627156399166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,19 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 583105908576906685}
---- !u!114 &4286228023673983877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583105908576906685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bbec2078eb47ee44973d53b62fe6c57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _effectValue: 50
 --- !u!58 &5561173949139741816
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -196,9 +183,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: Player
+  _layer:
+    serializedVersion: 2
+    m_Bits: 32768
   _action:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4072612867438334031}
+        m_MethodName: Collect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1834062776425584014}
         m_MethodName: SetClip
         m_Mode: 5
@@ -210,25 +211,17 @@ MonoBehaviour:
           m_StringArgument: fadeOut
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4286228023673983877}
-        m_MethodName: ApplyEffectToTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5561173949139741816}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &4072612867438334031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583105908576906685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47560d7db0d889c499d6e2f499f3938c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: HealthPotion
+  value: 1

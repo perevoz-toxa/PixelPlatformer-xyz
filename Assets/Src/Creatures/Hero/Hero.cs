@@ -4,6 +4,7 @@ using System.Collections;
 using Components.ColliderBased;
 using Components.GoBased;
 using Components.Health;
+using Components.Interactions;
 using Model;
 using Utils;
 
@@ -30,6 +31,7 @@ namespace Creatures.Hero
         [SerializeField] private RuntimeAnimatorController _armedAnimatorController;
         [SerializeField] private RuntimeAnimatorController _unarmedAnimatorController;
         [SerializeField] private CheckCircleOverlap _interactionCheck;
+        [SerializeField] private RequireItemComponent _healthPotions;
 
         [Header("Hero Particles")] [SerializeField]
         private ParticleSystem _coinsParticleSystem;
@@ -186,6 +188,11 @@ namespace Creatures.Hero
         public void Interact()
         {
             _interactionCheck.Check();
+        }
+
+        public void DrinkHealthPotion()
+        {
+            _healthPotions.Check();
         }
 
         public void AddInInventory(string id, int value)
