@@ -123,7 +123,7 @@ namespace Creatures.Hero
         {
             if (_allowDoubleJump && !_isGrounded && !_isOnWall)
             {
-                _particles.Spawn("jump");
+                DoJumpVFX();
                 _allowDoubleJump = false;
                 return _jumpSpeed;
             }
@@ -254,6 +254,7 @@ namespace Creatures.Hero
 
             inventory.Remove("Sword", 1);
             _particles.Spawn("throw");
+            _sounds.Play("Range");
         }
 
         public void OnHealthChange(int hp)

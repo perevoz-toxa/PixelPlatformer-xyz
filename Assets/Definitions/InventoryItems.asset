@@ -16,3 +16,4 @@ MonoBehaviour:
   - id: Coin
   - id: Sword
   - id: DoorKey
+  - id: HealthPotion

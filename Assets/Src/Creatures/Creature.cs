@@ -1,4 +1,5 @@
-﻿using Components.ColliderBased;
+﻿using Components.Audio;
+using Components.ColliderBased;
 using Components.GoBased;
 using Components.Health;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Creatures
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(SpawnListComponent))]
     [RequireComponent(typeof(HealthComponent))]
+    [RequireComponent(typeof(PlaySoundsComponent))]
     public class Creature : MonoBehaviour
     {
         [Header("Parameters")] [SerializeField]
@@ -28,6 +30,7 @@ namespace Creatures
         protected Rigidbody2D _rigidbody;
         protected Vector2 _direction;
         protected Animator _animator;
+        protected PlaySoundsComponent _sounds;
         protected bool _isGrounded;
         private bool _isJumping;
 
@@ -72,6 +75,7 @@ namespace Creatures
             _rigidbody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _healthComponent = GetComponent<HealthComponent>();
+            _sounds = GetComponent<PlaySoundsComponent>();
         }
 
         protected virtual void Update()
@@ -108,16 +112,22 @@ namespace Creatures
             if (_isGrounded)
             {
                 yVelocity += _jumpSpeed;
-                _particles.Spawn("jump");
+                DoJumpVFX();
             }
 
             return yVelocity;
         }
 
+        protected void DoJumpVFX()
+        {
+            _sounds.Play("Jump");
+            _particles.Spawn("jump");
+        }
+
         public virtual void TakeDamage()
         {
             if (_healthComponent.Health <= 0) return;
-            
+
             _isJumping = false;
             _animator.SetTrigger(hitKey);
         }
@@ -131,6 +141,7 @@ namespace Creatures
         {
             _animator.SetTrigger(attackKey);
             _particles.Spawn("attack");
+            _sounds.Play("Melee");
         }
 
         public void ApplyAttackEffect()

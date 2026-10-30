@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3059728189058963611}
   - component: {fileID: 5394773988471979474}
   - component: {fileID: 1979044227325297121}
+  - component: {fileID: 4952399102307895968}
   m_Layer: 13
   m_Name: Seashell
   m_TagString: Enemy
@@ -243,6 +244,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 2147466942847700971}
+--- !u!114 &4952399102307895968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147466942847700971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdeac7b43afa4c439e903c53a6981dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  sounds: []
 --- !u!1 &2147466942906577903
 GameObject:
   m_ObjectHideFlags: 0
