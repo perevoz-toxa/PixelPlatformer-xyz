@@ -38,6 +38,14 @@ namespace Components.GoBased
             _routine = StartCoroutine(StartSpawn(items));
         }
 
+        public void DropImmediate(GameObject[] items)
+        {
+            foreach (var item in items)
+            {
+                Spawn(item);
+            }
+        }
+
         private IEnumerator StartSpawn(GameObject[] particles)
         {
             for (var i = 0; i < particles.Length; i++)

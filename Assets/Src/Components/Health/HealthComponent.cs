@@ -20,7 +20,7 @@ namespace Components.Health
 
         [SerializeField] private UnityEvent _onDamage;
         [SerializeField] private UnityEvent _onHeal;
-        [SerializeField] private UnityEvent _onDie;
+        [SerializeField] public UnityEvent _onDie;
         [SerializeField] private HealthChangeEvent _onChange;
 
         public void ModifyHealth(int value)
@@ -41,6 +41,11 @@ namespace Components.Health
             {
                 _onHeal?.Invoke();
             }
+        }
+        
+        private void OnDestroy()
+        {
+            _onDie.RemoveAllListeners();
         }
 
         [Serializable]
