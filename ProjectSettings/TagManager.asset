@@ -24,8 +24,8 @@ TagManager:
   - Destructable
   - Hero
   - Collectables
-  - 
-  - 
+  - Checkers
+  - ColladableEnemies
   - 
   - 
   - 

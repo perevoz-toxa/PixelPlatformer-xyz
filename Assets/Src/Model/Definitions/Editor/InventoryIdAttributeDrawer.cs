@@ -13,7 +13,7 @@ namespace Model.Definitions.Editor
             var ids = new List<string>();
             foreach (var itemDef in defs)  
             {
-                ids.Add(itemDef.id);
+                ids.Add(itemDef.Id);
             }
             
             var index = ids.IndexOf(property.stringValue);
